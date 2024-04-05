@@ -9,16 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 899064b71ba2b414b934d432d7bbb24e, type: 3}
-  m_Name: Rooms Library
+  m_Script: {fileID: 11500000, guid: 9e63f7d0b49793a4ba1896a0abc1bdef, type: 3}
+  m_Name: Level Library
   m_EditorClassIdentifier: 
-  Rooms:
+  LevelDatas:
   - LevelNumber: 1
-    RoomNumber: 0
-    RoomSceneIndex: 0
-  - LevelNumber: 1
-    RoomNumber: 1
-    RoomSceneIndex: 2
+    SceneIndex: 0
   - LevelNumber: 2
-    RoomNumber: 0
-    RoomSceneIndex: 1
+    SceneIndex: 1

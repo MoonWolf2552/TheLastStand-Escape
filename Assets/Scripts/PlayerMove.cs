@@ -44,37 +44,21 @@ public class PlayerMove : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         }*/
         
-        Vector3 mousePos = Input.mousePosition;
-        float screenWidth = Screen.width / 2f;
-
+         Vector3 MouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.y));
+         _playerModel.LookAt(MouseWorldPosition);
+         _playerModel.rotation = Quaternion.Euler(new Vector3(0, _playerModel.rotation.eulerAngles.y, 0));
+        
         float horizontaInput = Input.GetAxis("Horizontal");
         float verticalnput = Input.GetAxis("Vertical");
         
         Vector3 inputVector = new Vector3(horizontaInput, 0, verticalnput);
         Vector3 worldVelocity = transform.TransformVector(inputVector) * _speed;
         
-        if (mousePos.x < screenWidth)
-        {
-            _playerModel.localEulerAngles = new Vector3(0, 180, 0);
-        }
-        else if (mousePos.x > screenWidth)
-        {
-            _playerModel.localEulerAngles = new Vector3(0, 0, 0);
-        }
         _rigidbody.velocity = new Vector3(worldVelocity.x, _rigidbody.velocity.y, worldVelocity.z);
         
     }
 
-    /*private void OnCollisionStay(Collision collision)
-    {
-        if (Vector3.Angle(collision.contacts[0].normal, Vector3.up) < 45f)
-        {
-            _grounded = true;
-        }
+    float AngleBetweenTwoPoints(Vector3 a, Vector3 b) {
+        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
     }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        _grounded = false;
-    }*/
 }

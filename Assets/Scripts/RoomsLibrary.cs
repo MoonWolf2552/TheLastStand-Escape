@@ -27,4 +27,17 @@ public class RoomsLibrary : ScriptableObject
 
         return 0;
     }
+    
+    public int GetSceneRoomNumber(int levelNum, int sceneIndex)
+    {
+        foreach (Room room in Rooms)
+        {
+            if (room.LevelNumber == levelNum && room.RoomSceneIndex == sceneIndex)
+            {
+                return room.RoomNumber;
+            }
+        }
+
+        return 0;
+    }
 }
