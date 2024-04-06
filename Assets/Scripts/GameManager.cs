@@ -25,16 +25,18 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    public void LoadRoom(int roomNumber)
+    public void LoadRoom(int roomIndex)
     {
-        SceneManager.LoadScene(roomNumber);
+        SceneManager.LoadScene(roomIndex);
     }
 
     public void LoadLevel(int level)
     {
-        Destroy(PlayerMove.Instance.gameObject);
-        Destroy(EnemyCounter.Instance.gameObject);
         int levelIndex = _levelLibrary.GetLevelSceneIndex(level);
         SceneManager.LoadScene(levelIndex);
+        
+        EnemyCounter.Instance.DestroyAllEnemies();
+        Destroy(PlayerMove.Instance.gameObject);
+        Destroy(EnemyCounter.Instance.gameObject);
     }
 }

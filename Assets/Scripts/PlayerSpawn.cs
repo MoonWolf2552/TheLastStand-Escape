@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerSpawn : MonoBehaviour
 {
-    void Awake()
+    public int LastRoom; // комната, из которой ведёт дверь
+    
+    public void MovePlayerToSpawn()
     {
-        PlayerMove.Instance.transform.position = transform.position;
-        PlayerMove.Instance.transform.rotation = transform.rotation;
+        PlayerMove.Instance.gameObject.transform.position = transform.position;
+        PlayerMove.Instance.gameObject.transform.rotation = transform.rotation;
     }
 }

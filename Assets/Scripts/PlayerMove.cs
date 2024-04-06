@@ -8,14 +8,13 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _speed = 5f;
     [SerializeField] private Transform _playerModel;
 
-    [SerializeField] private Transform _sword;
+    [SerializeField] private Transform _gun;
     
     private Rigidbody _rigidbody;
 
-    private float _xAngle;
-    private bool _grounded;
-
     public static PlayerMove Instance;
+
+    public int LastRoom;
 
     private void Awake()
     {
@@ -33,17 +32,10 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        DontDestroyOnLoad(gameObject);
     }
 
     void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.C))
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }*/
-        
          Vector3 MouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.y));
          _playerModel.LookAt(MouseWorldPosition);
          _playerModel.rotation = Quaternion.Euler(new Vector3(0, _playerModel.rotation.eulerAngles.y, 0));
@@ -55,10 +47,19 @@ public class PlayerMove : MonoBehaviour
         Vector3 worldVelocity = transform.TransformVector(inputVector) * _speed;
         
         _rigidbody.velocity = new Vector3(worldVelocity.x, _rigidbody.velocity.y, worldVelocity.z);
-        
     }
 
-    float AngleBetweenTwoPoints(Vector3 a, Vector3 b) {
-        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
+    public void MoveToSpawn()
+    {
+        PlayerSpawn[] playerSpawns = FindObjectsOfType<PlayerSpawn>();
+
+        foreach (PlayerSpawn playerSpawn in playerSpawns)
+        {
+            if (playerSpawn.LastRoom == LastRoom)
+            {
+                playerSpawn.MovePlayerToSpawn();
+                return;
+            }
+        }
     }
 }

@@ -6,6 +6,7 @@ public class Starter : MonoBehaviour
 {
     void Start()
     {
+        PlayerMove.Instance.MoveToSpawn();
         EnemyCounter.Instance.Count();
     }
 }

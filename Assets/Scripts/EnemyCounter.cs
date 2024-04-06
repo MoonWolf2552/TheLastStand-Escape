@@ -21,8 +21,6 @@ public class EnemyCounter : MonoBehaviour
     public EnemyData[] EnemyDatas;
 
     public Dictionary<int, int> Enemies = new Dictionary<int, int>();
-
-    private Enemy[] _enemiesInScene;
     private void Awake()
     {
         if (Instance == null)
@@ -43,14 +41,26 @@ public class EnemyCounter : MonoBehaviour
 
     public void Count()
     {
-        _enemiesInScene = FindObjectsOfType<Enemy>();
+        Enemy[] enemiesInScene = FindObjectsOfType<Enemy>();
+        
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int roomNumber = _roomsLibrary.GetSceneRoomNumber(_levelNumber, currentSceneIndex);
-        Debug.Log(_roomsLibrary.GetSceneRoomNumber(_levelNumber, currentSceneIndex));
+        
         int enemyCount = Enemies[roomNumber];
-        for (int i = 0; i < (_enemiesInScene.Length - enemyCount); i++)
+        for (int i = 0; i < (enemiesInScene.Length - enemyCount); i++)
         {
-            Destroy(_enemiesInScene[i].gameObject);
+            Destroy(enemiesInScene[i].gameObject);
+        }
+    }
+
+    public void DestroyAllEnemies()
+    {
+        Enemy[] enemiesInScene = FindObjectsOfType<Enemy>();
+
+
+        foreach (Enemy enemy in enemiesInScene)
+        {
+            Destroy(enemy.gameObject);
         }
     }
 

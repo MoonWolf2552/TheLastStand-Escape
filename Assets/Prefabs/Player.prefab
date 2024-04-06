@@ -108,7 +108,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _playerModel: {fileID: 2006257730864345870}
-  _sword: {fileID: 7247579275039517889}
+  _gun: {fileID: 0}
+  LastRoom: 0
 --- !u!1 &2137004484596837158
 GameObject:
   m_ObjectHideFlags: 0
