@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Starter : MonoBehaviour
 {
+    [ContextMenu("Start")]
     void Start()
     {
-        PlayerMove.Instance.MoveToSpawn();
+        FindObjectOfType<PlayerMove>().MoveToSpawn();
         EnemyCounter.Instance.Count();
     }
 }

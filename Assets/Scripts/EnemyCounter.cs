@@ -49,7 +49,7 @@ public class EnemyCounter : MonoBehaviour
         int enemyCount = Enemies[roomNumber];
         for (int i = 0; i < (enemiesInScene.Length - enemyCount); i++)
         {
-            Destroy(enemiesInScene[i].gameObject);
+            enemiesInScene[i].IsDied = true;
         }
     }
 
