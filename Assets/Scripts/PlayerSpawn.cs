@@ -8,7 +8,7 @@ public class PlayerSpawn : MonoBehaviour
     
     public void MovePlayerToSpawn()
     {
-        PlayerMove.Instance.transform.position = transform.position;
-        PlayerMove.Instance.transform.rotation = transform.rotation;
+        Player.Instance.transform.position = transform.position;
+        Player.Instance.transform.rotation = transform.rotation;
     }
 }

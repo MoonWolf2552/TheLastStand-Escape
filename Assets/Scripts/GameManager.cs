@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -14,7 +15,19 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private LevelLibrary _levelLibrary;
     
-    public GameObject Enter;
+    public GameObject EnterButton;
+    public GameObject InteractButton;
+    public TMP_Text InteractButtonText;
+
+    public Image NoteImage;
+    public TMP_Text NoteText;
+    public TMP_Text NoteCloseButtonText;
+    
+    public Image NewsImage;
+    public TMP_Text NewsText;
+    public TMP_Text NewsCloseButtonText;
+
+    public TMP_Text Requirement;
     private void Awake()
     {
         if (Instance == null)
@@ -26,13 +39,13 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        Enter.gameObject.SetActive(false);
+        EnterButton.gameObject.SetActive(false);
     }
     
     public void LoadRoom(int roomIndex)
     {
         SceneManager.LoadScene(roomIndex);
-        Enter.gameObject.SetActive(false);
+        EnterButton.gameObject.SetActive(false);
     }
 
     public void LoadLevel(int level)
@@ -41,13 +54,22 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(levelIndex);
         
         EnemyCounter.Instance.DestroyAllEnemies();
-        Destroy(PlayerMove.Instance.gameObject);
+        Destroy(Player.Instance.gameObject);
         Destroy(EnemyCounter.Instance.gameObject);
     }
-
-    [ContextMenu("enter")]
+    
     public void EnterRoom()
     {
-        PlayerMove.Instance.EnterDoor.EnterRoom();
+        Player.Instance.EnterDoor.Enter();
+    }
+    
+    public void Interact()
+    {
+        Player.Instance.ObjectToInteract.Interact();
+    }
+    
+    public void CloseNote()
+    {
+        Player.Instance.ObjectToInteract.Close();
     }
 }

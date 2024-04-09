@@ -7,7 +7,7 @@ public class Starter : MonoBehaviour
     [ContextMenu("Start")]
     void Start()
     {
-        FindObjectOfType<PlayerMove>().MoveToSpawn();
+        FindObjectOfType<Player>().MoveToSpawn();
         EnemyCounter.Instance.Count();
     }
 }
