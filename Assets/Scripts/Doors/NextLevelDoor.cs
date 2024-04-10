@@ -14,6 +14,7 @@ public class NextLevelDoor : Door
         if (Player.Instance.HaveKey)
         {
             GameManager.Instance.LoadLevel(Level + 1);
+            GameManager.Instance.EnterButton.SetActive(false);
         }
         else
         {

@@ -8,8 +8,9 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private int _health = 3;
+    [SerializeField] private float _health = 100;
     [SerializeField] private float _foundRadius = 3f;
+    [SerializeField] private int _money = 100;
     [SerializeField] private NavMeshAgent _agent;
     
     [SerializeField] private Animator _animator;
@@ -62,16 +63,16 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.rigidbody.GetComponent<Bullet>())
+        if (collision.rigidbody.GetComponent<Bullet>() is Bullet bullet)
         {
+            Hit(bullet);
             Destroy(collision.gameObject);
-            Hit();
         }
     }
 
-    public void Hit()
+    public void Hit(Bullet bullet)
     {
-        _health--;
+        _health -= bullet.Damage;
         
         if (_health <= 0)
         {
@@ -119,5 +120,9 @@ public class Enemy : MonoBehaviour
         
         _animator.SetTrigger("Die");
         _collider.enabled = false;
+
+        Progress.Instance.PlayerData.Money += _money;
+        Progress.Instance.Save();
+        GameManager.Instance.AddMoney();
     }
 }

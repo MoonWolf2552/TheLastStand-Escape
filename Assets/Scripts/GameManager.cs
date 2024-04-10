@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     public TMP_Text NewsCloseButtonText;
 
     public TMP_Text Requirement;
+
+    public TMP_Text Money;
     private void Awake()
     {
         if (Instance == null)
@@ -40,8 +42,17 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         EnterButton.gameObject.SetActive(false);
+        InteractButton.gameObject.SetActive(false);
+        NoteImage.gameObject.SetActive(false);
+        NewsImage.gameObject.SetActive(false);
+        Requirement.gameObject.SetActive(false);
     }
-    
+
+    private void Start()
+    {
+        Money.text = Progress.Instance.PlayerData.Money.ToString();
+    }
+
     public void LoadRoom(int roomIndex)
     {
         SceneManager.LoadScene(roomIndex);
@@ -56,6 +67,9 @@ public class GameManager : MonoBehaviour
         EnemyCounter.Instance.DestroyAllEnemies();
         Destroy(Player.Instance.gameObject);
         Destroy(EnemyCounter.Instance.gameObject);
+        
+        Progress.Instance.PlayerData.Level = level - 1;
+        Progress.Instance.Save();
     }
     
     public void EnterRoom()
@@ -71,5 +85,10 @@ public class GameManager : MonoBehaviour
     public void CloseNote()
     {
         Player.Instance.ObjectToInteract.Close();
+    }
+
+    public void AddMoney()
+    {
+        Money.text = Progress.Instance.PlayerData.Money.ToString();
     }
 }

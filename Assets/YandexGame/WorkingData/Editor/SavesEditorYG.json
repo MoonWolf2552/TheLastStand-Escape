@@ -1,0 +1,37 @@
+{
+    "idSave": 30,
+    "isFirstSession": false,
+    "language": "en",
+    "promptDone": false,
+    "money": 1,
+    "newPlayerName": "Hello!",
+    "openLevels": [
+        false,
+        true,
+        false
+    ],
+    "PlayerData": {
+        "Level": 1,
+        "Money": 7100,
+        "ActiveGun": 1,
+        "GunDatas": [
+            {
+                "Name": 1,
+                "IsOpened": true,
+                "GunLevel": 2
+            },
+            {
+                "Name": 2,
+                "IsOpened": true,
+                "GunLevel": 2
+            },
+            {
+                "Name": 3,
+                "IsOpened": true,
+                "GunLevel": 2
+            }
+        ],
+        "HealthLevel": 0,
+        "StaminaLevel": 0
+    }
+}
