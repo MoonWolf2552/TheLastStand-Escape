@@ -553,6 +553,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804ea5a6a7c78f74aaef575acb087073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: 0
+  GunLevel: 0
   _bullet: {fileID: 4582606749327586235, guid: e1597da08064b8a47adbbe40410eecd3, type: 3}
   _bulletSpawn: {fileID: 7568305011841814021}
   _bulletSpeed: 20
@@ -1649,8 +1651,12 @@ MonoBehaviour:
   _speed: 10
   _playerModel: {fileID: 1665260485255001096}
   _animator: {fileID: 8099547379633886709}
-  EnterDoor: {fileID: 0}
+  HaveKey: 0
+  HaveSecondaryKey: 0
   LastRoom: 0
+  EnterDoor: {fileID: 0}
+  ObjectToInteract: {fileID: 0}
+  IsRead: 0
 --- !u!1 &4313644347297042463
 GameObject:
   m_ObjectHideFlags: 0
@@ -4199,7 +4205,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
