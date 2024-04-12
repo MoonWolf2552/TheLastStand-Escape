@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
     
     [SerializeField] private Collider _collider;
 
+    public float Damage = 5;
+
     private bool _alive = true;
     private bool _found;
     private bool _isHitted;
@@ -61,18 +63,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void GetHit(float damage)
     {
-        if (collision.rigidbody.GetComponent<Bullet>() is Bullet bullet)
-        {
-            Hit(bullet);
-            Destroy(collision.gameObject);
-        }
-    }
-
-    public void Hit(Bullet bullet)
-    {
-        _health -= bullet.Damage;
+        _health -= damage;
         
         if (_health <= 0)
         {
@@ -95,18 +88,13 @@ public class Enemy : MonoBehaviour
         _isHitted = true;
         _agent.SetDestination(transform.position);
         
-        for (float t = 0; t < 1f; t += (Time.deltaTime / 0.53f))
-        {
-            yield return null;
-        }
+        yield return new WaitForSeconds(0.53f);
+        
         _isHitted = false;
         _animator.ResetTrigger("Hit");
         _animator.SetTrigger("Found");
         
-        for (float t = 0; t < 1f; t += (Time.deltaTime / 0.53f))
-        {
-            yield return null;
-        }
+        yield return new WaitForSeconds(0.53f);
         
         _collider.enabled = true;
     }

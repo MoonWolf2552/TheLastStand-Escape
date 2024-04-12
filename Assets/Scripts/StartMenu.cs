@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class StartMenu : MonoBehaviour
 {
     [SerializeField] private TMP_Text _playButton;
-    [SerializeField] private Button _shopButton;
 
     [SerializeField] private LevelLibrary _levelLibrary;
     
@@ -25,11 +24,7 @@ public class StartMenu : MonoBehaviour
 
     public void OpenShop()
     {
-        _playButton.GetComponentInParent<Button>().gameObject.SetActive(false);
-        _shopButton.gameObject.SetActive(false);
-        
         GunShop gunShop = FindObjectOfType<GunShop>();
         gunShop.NextGun();
-        gunShop.NextButton.gameObject.SetActive(true);
     }
 }

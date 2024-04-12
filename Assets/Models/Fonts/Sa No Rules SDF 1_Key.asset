@@ -6206,7 +6206,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Sa No Rules SDF Material
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
-  m_Parent: {fileID: 2100000, guid: c645919b03f90404db2aa1e65ecfbf16, type: 2}
+  m_Parent: {fileID: 4168520680287831580, guid: 9808f0d1bd95c1c4db5a2212be33e948,
+    type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - GLOW_ON

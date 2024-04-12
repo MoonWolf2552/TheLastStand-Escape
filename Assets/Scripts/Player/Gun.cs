@@ -16,7 +16,12 @@ public class Gun : MonoBehaviour
     private float _damage = 15;
     private float _shotPeriod = 0.3f;
 
+    [SerializeField] private int _maxAmmo;
+    private int _ammo;
+
     private float _timer;
+
+    private bool _isReload;
 
     private void Start()
     {
@@ -29,6 +34,8 @@ public class Gun : MonoBehaviour
             }
         }
 
+        _ammo = _maxAmmo;
+
         if (Name == GunType.Pistol)
         {
             _damage += 3 * GunLevel;
@@ -39,27 +46,28 @@ public class Gun : MonoBehaviour
             _shotPeriod -= 0.03f * GunLevel;
             _damage = 7;
         }
-        
-        Debug.Log((_damage, _shotPeriod));
+        else
+        {
+            _damage += 10 * GunLevel;
+        }
     }
 
     void Update()
     {
         _timer += Time.deltaTime;
-        // if (Input.GetMouseButtonDown(0))
-        // {
-        //     if (_timer >= _shotPeriod)
-        //     {
-        //         Fire();
-        //         _timer = 0;
-        //     }
-        // }
         if (Input.GetMouseButton(0))
         {
-            if (_timer >= _shotPeriod)
+            if (_timer >= _shotPeriod && !_isReload)
             {
-                Fire();
-                _timer = 0;
+                if (_ammo > 0)
+                {
+                    Fire();
+                    _timer = 0;
+                }
+                else
+                {
+                    StartCoroutine(Reload());
+                }
             }
         }
     }
@@ -69,5 +77,21 @@ public class Gun : MonoBehaviour
         Bullet newBullet = Instantiate(_bullet, _bulletSpawn.position, _bulletSpawn.rotation);
         newBullet.Damage = _damage;
         newBullet.GetComponent<Rigidbody>().velocity = _bulletSpawn.forward * _bulletSpeed;
+        _ammo--;
+    }
+    
+    private IEnumerator Reload()
+    {
+        Player.Instance.IsReload = true;
+
+        _isReload = true;
+        
+        yield return new WaitForSeconds(1f);
+
+        _isReload = false;
+
+        _ammo = _maxAmmo;
+        
+        Player.Instance.IsReload = false;
     }
 }

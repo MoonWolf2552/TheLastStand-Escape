@@ -29,7 +29,7 @@ public class GunShop : MonoBehaviour
 
     public Button BuyButton;
     public Button UpgradeButton;
-    public Button NextButton;
+    public Button EquipButton;
     public TMP_Text GunLevelText;
     public TMP_Text GunLevelPriceText;
 
@@ -52,10 +52,6 @@ public class GunShop : MonoBehaviour
 
     public void NextGun()
     {
-        if (_gun > -1)
-        {
-            Guns[_gun].gameObject.SetActive(false);
-        }
         _gun = (_gun + 1) % Guns.Length;
         Guns[_gun].gameObject.SetActive(true);
         
@@ -67,10 +63,8 @@ public class GunShop : MonoBehaviour
                 if (!gunData.IsOpened)
                 {
                     BuyButton.gameObject.SetActive(true);
-                    UpgradeButton.gameObject.SetActive(false);
                     
                     GunLevelPriceText.gameObject.SetActive(true);
-                    GunLevelText.gameObject.SetActive(false);
                     
                     Debug.Log(gunData.GunLevel);
                     
@@ -80,8 +74,10 @@ public class GunShop : MonoBehaviour
                 }
                 else
                 {
-                    BuyButton.gameObject.SetActive(false);
-                    
+                    if (Progress.Instance.PlayerData.ActiveGun != name)
+                    {
+                        EquipButton.gameObject.SetActive(true);
+                    }
                     
                     GunLevelText.gameObject.SetActive(true);
                     
@@ -89,7 +85,6 @@ public class GunShop : MonoBehaviour
 
                     if (gunData.GunLevel + 1 > GunPrices[name].Count)
                     {
-                        GunLevelPriceText.gameObject.SetActive(false);
                         return;
                     }
                     int price = GunPrices[name][gunData.GunLevel + 1];
@@ -166,6 +161,8 @@ public class GunShop : MonoBehaviour
                     
                     GunLevelText.gameObject.SetActive(true);
                     
+                    EquipButton.gameObject.SetActive(true);
+                    
                     price = GunPrices[name][gunData.GunLevel + 1];
                     
                     GunLevelText.text = "Уровень " + gunData.GunLevel;
@@ -175,5 +172,15 @@ public class GunShop : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void Equip()
+    {
+        GunType name = Guns[_gun].Type;
+        
+        Debug.Log(name);
+
+        Progress.Instance.PlayerData.ActiveGun = name;
+        Progress.Instance.Save();
     }
 }
