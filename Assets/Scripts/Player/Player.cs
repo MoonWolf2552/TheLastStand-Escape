@@ -49,6 +49,8 @@ public class Player : MonoBehaviour
     public bool IsReload;
     
     public bool IsDamaged;
+    
+    [SerializeField] private ShopLibrary _shopLibrary;
 
     private void Awake()
     {
@@ -76,6 +78,10 @@ public class Player : MonoBehaviour
         _staminaSlider.GetComponent<Slider>().maxValue = _stamina;
         _healthSlider = FindObjectOfType<Health>();
         _healthSlider.GetComponent<Slider>().maxValue = _health;
+
+        _health = _shopLibrary.UpgradePrices[UpgradeType.Health][Progress.Instance.PlayerData.HealthLevel].value;
+        _stamina = _shopLibrary.UpgradePrices[UpgradeType.Stamina][Progress.Instance.PlayerData.StaminaLevel].value;
+        
     }
 
     void Update()

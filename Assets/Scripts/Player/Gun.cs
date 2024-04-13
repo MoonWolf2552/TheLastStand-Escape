@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -22,6 +23,10 @@ public class Gun : MonoBehaviour
     private float _timer;
 
     private bool _isReload;
+    
+    private TMP_Text _ammoText;
+
+    [SerializeField] private ShopLibrary _shopLibrary;
 
     private void Start()
     {
@@ -38,18 +43,21 @@ public class Gun : MonoBehaviour
 
         if (Name == GunType.Pistol)
         {
-            _damage += 3 * GunLevel;
+            _damage = _shopLibrary.GunPrices[Name][GunLevel].value;
             _shotPeriod = 0.6f;
         }
         else if (Name == GunType.Automatic)
         {
-            _shotPeriod -= 0.03f * GunLevel;
+            _shotPeriod = _shopLibrary.GunPrices[Name][GunLevel].value;
             _damage = 7;
         }
         else
         {
-            _damage += 10 * GunLevel;
+            _damage = _shopLibrary.GunPrices[Name][GunLevel].value;
         }
+
+        _ammoText = FindObjectOfType<Ammo>().GetComponent<TMP_Text>();
+        _ammoText.text = $"{_ammo}/{_maxAmmo}";
     }
 
     void Update()
@@ -78,6 +86,7 @@ public class Gun : MonoBehaviour
         newBullet.Damage = _damage;
         newBullet.GetComponent<Rigidbody>().velocity = _bulletSpawn.forward * _bulletSpeed;
         _ammo--;
+        _ammoText.text = $"{_ammo}/{_maxAmmo}";
     }
     
     private IEnumerator Reload()
@@ -91,6 +100,7 @@ public class Gun : MonoBehaviour
         _isReload = false;
 
         _ammo = _maxAmmo;
+        _ammoText.text = $"{_ammo}/{_maxAmmo}";
         
         Player.Instance.IsReload = false;
     }

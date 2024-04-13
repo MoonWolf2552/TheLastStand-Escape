@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.rigidbody.GetComponent<Enemy>() is Enemy enemy)
+        if (collision.gameObject.GetComponent<Enemy>() is Enemy enemy)
         {
             enemy.GetHit(Damage);
         }

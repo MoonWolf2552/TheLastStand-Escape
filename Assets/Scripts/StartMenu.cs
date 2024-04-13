@@ -25,6 +25,6 @@ public class StartMenu : MonoBehaviour
     public void OpenShop()
     {
         GunShop gunShop = FindObjectOfType<GunShop>();
-        gunShop.NextGun();
+        gunShop.OpenShop();
     }
 }
