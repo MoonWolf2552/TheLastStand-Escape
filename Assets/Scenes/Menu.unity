@@ -1724,7 +1724,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 645794718}
   m_HandleRect: {fileID: 0}
@@ -4568,7 +4568,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5d15445397c00f64b83e1a969cb0ed3c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.225
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -7058,7 +7058,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1849341548}
   m_HandleRect: {fileID: 0}
@@ -8802,7 +8802,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1269156298}
   m_HandleRect: {fileID: 0}
@@ -9027,7 +9027,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1723757981}
   m_HandleRect: {fileID: 0}
@@ -10473,13 +10473,13 @@ RectTransform:
   m_Children:
   - {fileID: 1421059722}
   - {fileID: 1300030600}
+  - {fileID: 1311204360}
   - {fileID: 1794973019}
   - {fileID: 1765924395}
-  - {fileID: 1311204360}
   - {fileID: 309471674}
+  - {fileID: 167084776}
   - {fileID: 2008217453}
   - {fileID: 201893739}
-  - {fileID: 167084776}
   m_Father: {fileID: 1641534570}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
-public class GunShop : MonoBehaviour
+public class Shop : MonoBehaviour
 {
     public Button BuyButton;
     public Button UpgradeButton;
