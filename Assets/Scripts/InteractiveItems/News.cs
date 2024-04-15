@@ -19,7 +19,7 @@ public class News : InteractiveObject
         GameManager.Instance.NewsText.text = _news;
         GameManager.Instance.NewsCloseButtonText.text = _newsCloseButtonText;
         
-        GameManager.Instance.NewsImage.gameObject.SetActive(true);
+        GameManager.Instance.NewsImageBackgroung.gameObject.SetActive(true);
     }
 
     public override void Close()
@@ -30,7 +30,7 @@ public class News : InteractiveObject
         GameManager.Instance.NewsText.text = null;
         GameManager.Instance.NewsCloseButtonText.text = null;
         
-        GameManager.Instance.NewsImage.gameObject.SetActive(false);
+        GameManager.Instance.NewsImageBackgroung.gameObject.SetActive(false);
         
         Player.Instance.IsRead = false;
         GameManager.Instance.InteractButton.SetActive(true);

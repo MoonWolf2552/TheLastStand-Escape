@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Level Library
   m_EditorClassIdentifier: 
   LevelDatas:
-  - LevelNumber: 1
+  - LevelNumber: 0
     SceneIndex: 0
-  - LevelNumber: 2
+  - LevelNumber: 1
     SceneIndex: 1
+  - LevelNumber: 2
+    SceneIndex: 2

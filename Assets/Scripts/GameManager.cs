@@ -20,10 +20,12 @@ public class GameManager : MonoBehaviour
     public TMP_Text InteractButtonText;
 
     public Image NoteImage;
+    public Image NoteImageBackgroung;
     public TMP_Text NoteText;
     public TMP_Text NoteCloseButtonText;
     
     public Image NewsImage;
+    public Image NewsImageBackgroung;
     public TMP_Text NewsText;
     public TMP_Text NewsCloseButtonText;
 
@@ -43,8 +45,8 @@ public class GameManager : MonoBehaviour
         }
         EnterButton.gameObject.SetActive(false);
         InteractButton.gameObject.SetActive(false);
-        NoteImage.gameObject.SetActive(false);
-        NewsImage.gameObject.SetActive(false);
+        NoteImageBackgroung.gameObject.SetActive(false);
+        NewsImageBackgroung.gameObject.SetActive(false);
         Requirement.gameObject.SetActive(false);
     }
 
@@ -61,15 +63,23 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(int level)
     {
-        int levelIndex = _levelLibrary.GetLevelSceneIndex(level);
-        SceneManager.LoadScene(levelIndex);
-        
-        EnemyCounter.Instance.DestroyAllEnemies();
-        Destroy(Player.Instance.gameObject);
-        Destroy(EnemyCounter.Instance.gameObject);
-        
         Progress.Instance.PlayerData.Level = level - 1;
         Progress.Instance.Save();
+
+        if (EnemyCounter.Instance)
+        {
+            EnemyCounter.Instance.DestroyAllEnemies();
+            Destroy(EnemyCounter.Instance.gameObject);
+        }
+        Destroy(Player.Instance.gameObject);
+        
+        int levelIndex = _levelLibrary.GetLevelSceneIndex(level);
+        SceneManager.LoadScene(levelIndex);
+    }
+
+    public void LoadShelter()
+    {
+        SceneManager.LoadScene(0);
     }
     
     public void EnterRoom()

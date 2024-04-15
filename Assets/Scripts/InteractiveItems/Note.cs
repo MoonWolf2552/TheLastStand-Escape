@@ -19,7 +19,7 @@ public class Note : InteractiveObject
         GameManager.Instance.NoteText.text = _note;
         GameManager.Instance.NoteCloseButtonText.text = _noteCloseButtonText;
         
-        GameManager.Instance.NoteImage.gameObject.SetActive(true);
+        GameManager.Instance.NoteImageBackgroung.gameObject.SetActive(true);
     }
 
     public override void Close()
@@ -30,7 +30,7 @@ public class Note : InteractiveObject
         GameManager.Instance.NoteText.text = null;
         GameManager.Instance.NoteCloseButtonText.text = null;
         
-        GameManager.Instance.NoteImage.gameObject.SetActive(false);
+        GameManager.Instance.NoteImageBackgroung.gameObject.SetActive(false);
         
         Player.Instance.IsRead = false;
         GameManager.Instance.InteractButton.SetActive(true);

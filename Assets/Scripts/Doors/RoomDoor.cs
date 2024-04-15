@@ -37,12 +37,6 @@ public class RoomDoor : Door
 
         Player.Instance.LastRoom = roomNumber;
 
-        if (_needKey)
-        {
-            GameManager.Instance.Requirement.gameObject.SetActive(false);
-            GameManager.Instance.Requirement.text = null;
-        }
-
         int roomIndex = _roomsLibrary.GetRoomSceneIndex(_levelNumber, _roomNumber);
         GameManager.Instance.LoadRoom(roomIndex);
     }

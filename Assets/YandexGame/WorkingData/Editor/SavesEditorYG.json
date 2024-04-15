@@ -1,5 +1,5 @@
 {
-    "idSave": 77,
+    "idSave": 109,
     "isFirstSession": false,
     "language": "en",
     "promptDone": false,
@@ -12,7 +12,7 @@
     ],
     "PlayerData": {
         "Level": 0,
-        "Money": 8200,
+        "Money": 9200,
         "ActiveGun": 1,
         "GunDatas": [
             {

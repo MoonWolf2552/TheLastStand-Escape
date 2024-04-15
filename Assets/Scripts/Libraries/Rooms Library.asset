@@ -16,12 +16,12 @@ MonoBehaviour:
   - LevelNumber: 1
     Rooms:
     - RoomNumber: 0
-      RoomSceneIndex: 0
+      RoomSceneIndex: 1
     - RoomNumber: 1
-      RoomSceneIndex: 2
-    - RoomNumber: 2
       RoomSceneIndex: 3
+    - RoomNumber: 2
+      RoomSceneIndex: 4
   - LevelNumber: 2
     Rooms:
     - RoomNumber: 0
-      RoomSceneIndex: 1
+      RoomSceneIndex: 2

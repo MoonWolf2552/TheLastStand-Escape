@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _stamina = 3f;
+    [SerializeField] private float _maxStamina = 3f;
     [SerializeField] private float _health = 10f;
     
     [SerializeField] private Transform _playerModel;
@@ -74,14 +75,15 @@ public class Player : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         
+        _health = _shopLibrary.UpgradePrices[UpgradeType.Health][Progress.Instance.PlayerData.HealthLevel].value;
+        _maxStamina = _shopLibrary.UpgradePrices[UpgradeType.Stamina][Progress.Instance.PlayerData.StaminaLevel].value;
+        _stamina = _maxStamina;
+        
         _staminaSlider = FindObjectOfType<Stamina>();
-        _staminaSlider.GetComponent<Slider>().maxValue = _stamina;
+        _staminaSlider.GetComponent<Slider>().maxValue = _maxStamina;
         _healthSlider = FindObjectOfType<Health>();
         _healthSlider.GetComponent<Slider>().maxValue = _health;
-
-        _health = _shopLibrary.UpgradePrices[UpgradeType.Health][Progress.Instance.PlayerData.HealthLevel].value;
-        _stamina = _shopLibrary.UpgradePrices[UpgradeType.Stamina][Progress.Instance.PlayerData.StaminaLevel].value;
-        
+        _healthSlider.GetComponent<Slider>().value = _health;
     }
 
     void Update()
@@ -102,12 +104,14 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (IsRead || IsReload) return;
+        if (IsRead) return;
 
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
             Input.mousePosition.y, -Camera.main.transform.position.y));
         _playerModel.LookAt(mouseWorldPosition);
         _playerModel.rotation = Quaternion.Euler(new Vector3(0, _playerModel.rotation.eulerAngles.y, 0));
+        
+        if (IsReload) return;
 
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
@@ -137,6 +141,11 @@ public class Player : MonoBehaviour
             worldVelocity = transform.TransformVector(inputVector) * _speed;
             
             _stamina += 0.5f * Time.deltaTime;
+
+            if (_stamina > _maxStamina)
+            {
+                _stamina = _maxStamina;
+            }
         }
 
         _staminaSlider.GetComponent<Slider>().value = _stamina;

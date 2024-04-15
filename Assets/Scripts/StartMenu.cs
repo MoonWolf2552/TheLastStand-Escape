@@ -21,10 +21,4 @@ public class StartMenu : MonoBehaviour
         int levelIndex = _levelLibrary.GetLevelSceneIndex(Progress.Instance.PlayerData.Level + 1);
         SceneManager.LoadScene(levelIndex);
     }
-
-    public void OpenShop()
-    {
-        Shop shop = FindObjectOfType<Shop>();
-        shop.OpenShop();
-    }
 }

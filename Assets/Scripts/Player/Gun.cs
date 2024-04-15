@@ -63,6 +63,9 @@ public class Gun : MonoBehaviour
     void Update()
     {
         _timer += Time.deltaTime;
+        
+        if (Player.Instance.IsRead) return;
+        
         if (Input.GetMouseButton(0))
         {
             if (_timer >= _shotPeriod && !_isReload)
