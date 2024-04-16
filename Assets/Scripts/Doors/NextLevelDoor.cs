@@ -7,18 +7,16 @@ public class NextLevelDoor : Door
 {
     public int Level;
 
-    [SerializeField] private String _requirement;
-
     public override void Enter()
     {
         if (Player.Instance.HaveKey)
         {
-            GameManager.Instance.LoadLevel(Level + 1);
             GameManager.Instance.EnterButton.SetActive(false);
+            GameManager.Instance.ShowWin();
         }
         else
         {
-            GameManager.Instance.Requirement.gameObject.SetActive(true);
+            GameManager.Instance.RequirementGO.gameObject.SetActive(true);
             GameManager.Instance.Requirement.text = _requirement;
         }
     }

@@ -6,12 +6,13 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 using Debug = UnityEngine.Debug;
 
 public class Shop : MonoBehaviour
 {
     public static Shop Instance;
-    
+
     public Button BuyButton;
     public Button UpgradeButton;
     public Button EquipButton;
@@ -38,11 +39,13 @@ public class Shop : MonoBehaviour
     [SerializeField] private TMP_Text _healthLevelText;
     [SerializeField] private TMP_Text _healthPriceText;
 
+    private String _prefix = "Уровень ";
+
     private void Awake()
     {
         GunPrices = _shopLibrary.GunPrices;
         UpgradePrices = _shopLibrary.UpgradePrices;
-        
+
         if (Instance == null)
         {
             Instance = this;
@@ -51,15 +54,20 @@ public class Shop : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (YandexGame.lang == "en")
+        {
+            _prefix = "Level ";
+        }
     }
 
     public void OpenGunShop()
     {
         _gun = 0;
         Guns[_gun].gameObject.SetActive(true);
-        
+
         MoneyText.text = Progress.Instance.PlayerData.Money.ToString();
-        
+
         GunType name = Guns[_gun].Type;
         foreach (GunData gunData in Progress.Instance.PlayerData.GunDatas)
         {
@@ -86,7 +94,7 @@ public class Shop : MonoBehaviour
 
                     GunLevelText.gameObject.SetActive(true);
 
-                    GunLevelText.text = "Уровень " + gunData.GunLevel;
+                    GunLevelText.text = _prefix + gunData.GunLevel;
 
                     if (gunData.GunLevel >= GunPrices[name].Count)
                     {
@@ -138,7 +146,7 @@ public class Shop : MonoBehaviour
 
                     GunLevelText.gameObject.SetActive(true);
 
-                    GunLevelText.text = "Уровень " + gunData.GunLevel;
+                    GunLevelText.text = _prefix + gunData.GunLevel;
 
                     if (gunData.GunLevel >= GunPrices[name].Count)
                     {
@@ -176,7 +184,7 @@ public class Shop : MonoBehaviour
                     gunData.GunLevel++;
                     Progress.Instance.Save();
 
-                    GunLevelText.text = "Уровень " + gunData.GunLevel;
+                    GunLevelText.text = _prefix + gunData.GunLevel;
                     MoneyText.text = Progress.Instance.PlayerData.Money.ToString();
 
                     if (gunData.GunLevel >= GunPrices[name].Count)
@@ -224,7 +232,7 @@ public class Shop : MonoBehaviour
 
                     price = GunPrices[name][gunData.GunLevel + 1].price;
 
-                    GunLevelText.text = "Уровень " + gunData.GunLevel;
+                    GunLevelText.text = _prefix + gunData.GunLevel;
                     GunLevelPriceText.text = price.ToString();
                     MoneyText.text = Progress.Instance.PlayerData.Money.ToString();
                 }
@@ -250,8 +258,8 @@ public class Shop : MonoBehaviour
 
         _healthSlider.value = playerData.HealthLevel;
         _staminaSlider.value = playerData.StaminaLevel;
-        
-        _healthLevelText.text = "Уровень " + playerData.HealthLevel;
+
+        _healthLevelText.text = _prefix + playerData.HealthLevel;
 
         if (playerData.HealthLevel >= UpgradePrices[UpgradeType.Health].Count)
         {
@@ -263,9 +271,9 @@ public class Shop : MonoBehaviour
         int price = UpgradePrices[UpgradeType.Health][playerData.HealthLevel + 1].price;
 
         _healthPriceText.text = price.ToString();
-        
-        _staminaLevelText.text = "Уровень " + playerData.StaminaLevel;
-        
+
+        _staminaLevelText.text = _prefix + playerData.StaminaLevel;
+
         if (playerData.StaminaLevel >= UpgradePrices[UpgradeType.Stamina].Count)
         {
             _staminaPriceText.gameObject.SetActive(false);
@@ -274,9 +282,9 @@ public class Shop : MonoBehaviour
         }
 
         price = UpgradePrices[UpgradeType.Stamina][playerData.StaminaLevel + 1].price;
-        
+
         _staminaPriceText.text = price.ToString();
-        
+
         MoneyText.text = Progress.Instance.PlayerData.Money.ToString();
     }
 
@@ -290,13 +298,13 @@ public class Shop : MonoBehaviour
         {
             playerData.Money -= price;
             playerData.HealthLevel++;
-            
-            _healthLevelText.text = "Уровень " + playerData.HealthLevel;
-            
+
+            _healthLevelText.text = _prefix + playerData.HealthLevel;
+
             _healthSlider.value = playerData.HealthLevel;
 
             MoneyText.text = Progress.Instance.PlayerData.Money.ToString();
-            
+
             Progress.Instance.Save();
 
             if (playerData.HealthLevel >= UpgradePrices[UpgradeType.Health].Count)
@@ -321,13 +329,13 @@ public class Shop : MonoBehaviour
         {
             playerData.Money -= price;
             playerData.StaminaLevel++;
-            
-            _staminaLevelText.text = "Уровень " + playerData.StaminaLevel;
-            
+
+            _staminaLevelText.text = _prefix + playerData.StaminaLevel;
+
             _staminaSlider.value = playerData.StaminaLevel;
 
             MoneyText.text = Progress.Instance.PlayerData.Money.ToString();
-            
+
             Progress.Instance.Save();
 
             if (playerData.StaminaLevel >= UpgradePrices[UpgradeType.Stamina].Count)

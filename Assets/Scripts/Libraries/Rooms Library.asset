@@ -21,6 +21,8 @@ MonoBehaviour:
       RoomSceneIndex: 3
     - RoomNumber: 2
       RoomSceneIndex: 4
+    - RoomNumber: 3
+      RoomSceneIndex: 5
   - LevelNumber: 2
     Rooms:
     - RoomNumber: 0

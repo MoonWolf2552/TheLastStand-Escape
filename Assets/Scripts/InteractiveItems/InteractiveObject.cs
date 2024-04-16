@@ -2,11 +2,29 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class InteractiveObject : MonoBehaviour
 {
     [SerializeField] protected String InteractText = "Взаимодействовать";
-    
+    [SerializeField] protected String InteractTextEn = "Interact";
+
+    protected virtual void Start()
+    {
+        if (YandexGame.lang == "en")
+        {
+            InteractText = InteractTextEn;
+        }
+    }
+
+    private void Update()
+    {
+        if (GetComponent<Light>())
+        {
+            GetComponent<Light>().enabled = !((transform.position - Player.Instance.transform.position).magnitude > 5);
+        }
+    }
+
     public virtual void Interact()
     {
         GameManager.Instance.InteractButton.SetActive(false);

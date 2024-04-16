@@ -9,15 +9,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Shelter/Shelter.unity
     guid: 00c432e7f750f884c9db463ef2215bc7
   - enabled: 1
-    path: Assets/Scenes/Test/Level1/L1R0.unity
-    guid: 7b93bd1d40f5f6245a461fbf416656e8
+    path: Assets/Scenes/Level1/L1R0.unity
+    guid: cf8682faee3d16645b19c591b944c415
   - enabled: 1
     path: Assets/Scenes/Test/Level2/L2R0.unity
     guid: eb20cb0c140b4924bb3a266c9db8df64
   - enabled: 1
-    path: Assets/Scenes/Test/Level1/L1R1.unity
-    guid: 9e82bef152303ef45877d0059991a8e6
+    path: Assets/Scenes/Level1/L1R1.unity
+    guid: b351bb3aac9385e46984743f6481435d
   - enabled: 1
-    path: Assets/Scenes/Test/Level1/L1R2.unity
-    guid: 6f9db58a0d17c7848a62c9db73a5f286
+    path: Assets/Scenes/Level1/L1R2.unity
+    guid: 77e12d6a53a4f7d45b2fe10d7a116f77
+  - enabled: 1
+    path: Assets/Scenes/Level1/L1R3.unity
+    guid: d56046c49a378c741aa0c89a3499d695
   m_configObjects: {}

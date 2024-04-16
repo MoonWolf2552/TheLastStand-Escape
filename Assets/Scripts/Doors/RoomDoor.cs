@@ -10,14 +10,14 @@ public class RoomDoor : Door
     [SerializeField] private int _roomNumber;
     [SerializeField] private int _levelNumber;
     [SerializeField] private RoomsLibrary _roomsLibrary;
-    
-    [SerializeField] private String _requirement;
-    
+
     [SerializeField] private bool _isLocked;
     [SerializeField] private bool _needKey;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+        
         if (_needKey)
         {
             _isLocked = true;
@@ -28,10 +28,13 @@ public class RoomDoor : Door
     {
         if (_isLocked)
         {
-            GameManager.Instance.Requirement.gameObject.SetActive(true);
+            GameManager.Instance.RequirementGO.gameObject.SetActive(true);
             GameManager.Instance.Requirement.text = _requirement;
-            if (!_needKey || (_needKey && !Player.Instance.HaveSecondaryKey))return;
+            if (!_needKey || (_needKey && !Player.Instance.HaveSecondaryKey)) return;
         }
+        
+        GameManager.Instance.RequirementGO.gameObject.SetActive(false);
+
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int roomNumber = _roomsLibrary.GetSceneRoomNumber(_levelNumber, currentSceneIndex);
 
@@ -47,7 +50,7 @@ public class RoomDoor : Door
 
         if (_isLocked)
         {
-            GameManager.Instance.Requirement.gameObject.SetActive(false);
+            GameManager.Instance.RequirementGO.gameObject.SetActive(false);
             GameManager.Instance.Requirement.text = null;
         }
     }

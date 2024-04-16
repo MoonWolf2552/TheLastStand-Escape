@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Animator _animator;
 
+    [SerializeField] private Camera _camera;
+
     [SerializeField] private GunObject[] _gunObjects;
 
     private Stamina _staminaSlider;
@@ -74,9 +76,11 @@ public class Player : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+
+        PlayerData playerData = Progress.Instance.PlayerData;
         
-        _health = _shopLibrary.UpgradePrices[UpgradeType.Health][Progress.Instance.PlayerData.HealthLevel].value;
-        _maxStamina = _shopLibrary.UpgradePrices[UpgradeType.Stamina][Progress.Instance.PlayerData.StaminaLevel].value;
+        _health = _shopLibrary.UpgradePrices[UpgradeType.Health][playerData.HealthLevel].value;
+        _maxStamina = _shopLibrary.UpgradePrices[UpgradeType.Stamina][playerData.StaminaLevel].value;
         _stamina = _maxStamina;
         
         _staminaSlider = FindObjectOfType<Stamina>();
@@ -84,6 +88,8 @@ public class Player : MonoBehaviour
         _healthSlider = FindObjectOfType<Health>();
         _healthSlider.GetComponent<Slider>().maxValue = _health;
         _healthSlider.GetComponent<Slider>().value = _health;
+
+        _camera.GetComponent<AudioListener>().enabled = playerData.Sound;
     }
 
     void Update()
@@ -179,6 +185,13 @@ public class Player : MonoBehaviour
     {
         _health -= damage;
         _healthSlider.GetComponent<Slider>().value = _health;
+
+        if (_health <= 0)
+        {
+            GameManager.Instance.ShowLose();
+        }
+        
+        StartCoroutine(HitProcess());
     }
 
     private IEnumerator HitProcess()

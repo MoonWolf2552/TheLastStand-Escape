@@ -30,8 +30,12 @@ public class GameManager : MonoBehaviour
     public TMP_Text NewsCloseButtonText;
 
     public TMP_Text Requirement;
+    public GameObject RequirementGO;
 
     public TMP_Text Money;
+
+    public GameObject WinObject;
+    public GameObject LoseObject;
     private void Awake()
     {
         if (Instance == null)
@@ -47,7 +51,7 @@ public class GameManager : MonoBehaviour
         InteractButton.gameObject.SetActive(false);
         NoteImageBackgroung.gameObject.SetActive(false);
         NewsImageBackgroung.gameObject.SetActive(false);
-        Requirement.gameObject.SetActive(false);
+        RequirementGO.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -63,14 +67,6 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(int level)
     {
-        Progress.Instance.PlayerData.Level = level - 1;
-        Progress.Instance.Save();
-
-        if (EnemyCounter.Instance)
-        {
-            EnemyCounter.Instance.DestroyAllEnemies();
-            Destroy(EnemyCounter.Instance.gameObject);
-        }
         Destroy(Player.Instance.gameObject);
         
         int levelIndex = _levelLibrary.GetLevelSceneIndex(level);
@@ -100,5 +96,44 @@ public class GameManager : MonoBehaviour
     public void AddMoney()
     {
         Money.text = Progress.Instance.PlayerData.Money.ToString();
+    }
+    
+    public void ShowWin()
+    {
+        WinObject.SetActive(true);
+
+        Player.Instance.IsRead = true;
+
+        Progress.Instance.PlayerData.Level++;
+        Progress.Instance.Save();
+        
+        if (EnemyCounter.Instance)
+        {
+            EnemyCounter.Instance.DestroyAllEnemies();
+            Destroy(EnemyCounter.Instance.gameObject);
+        }
+    }
+
+    public void Next()
+    {
+        LoadLevel(Progress.Instance.PlayerData.Level);
+    }
+    
+    public void ShowLose()
+    {
+        LoseObject.SetActive(true);
+        
+        Player.Instance.IsRead = true;
+        
+        if (EnemyCounter.Instance)
+        {
+            EnemyCounter.Instance.DestroyAllEnemies();
+            Destroy(EnemyCounter.Instance.gameObject);
+        }
+    }
+
+    public void Restart()
+    {
+        LoadLevel(Progress.Instance.PlayerData.Level);
     }
 }

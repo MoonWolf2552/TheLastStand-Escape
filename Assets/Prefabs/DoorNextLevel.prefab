@@ -89,8 +89,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 042303ec3f8a8fa4188257b72825ba8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _requirement: "\u041D\u0443\u0436\u0435\u043D \u043A\u043B\u044E\u0447"
+  _requirementEn: Need key
   Level: 0
-  _requirement: 
 --- !u!1001 &8381036305924718322
 PrefabInstance:
   m_ObjectHideFlags: 0

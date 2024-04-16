@@ -688,6 +688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractText: "\u0423\u043B\u0443\u0447\u0448\u0438\u0442\u044C \u0438\u0433\u0440\u043E\u043A\u0430"
+  InteractTextEn: Interact
   _playerUpgradeShop: {fileID: 235771199}
   _shopVisual: {fileID: 1670022671}
 --- !u!4 &239046762
@@ -1988,6 +1989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractText: "\u0423\u043B\u0443\u0447\u0448\u0438\u0442\u044C \u043E\u0440\u0443\u0436\u0438\u0435"
+  InteractTextEn: Interact
   _gunUpgradeShop: {fileID: 445287989}
   _shopVisual: {fileID: 1670022671}
 --- !u!65 &533111953
@@ -2144,8 +2146,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 483e0d92d7d187d46be89b71f8f3d2c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Level: 0
   _requirement: 
+  _requirementEn: 
+  Level: 0
 --- !u!1 &570222004
 GameObject:
   m_ObjectHideFlags: 0
@@ -2157,6 +2160,7 @@ GameObject:
   - component: {fileID: 570222005}
   - component: {fileID: 570222007}
   - component: {fileID: 570222006}
+  - component: {fileID: 570222008}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2281,6 +2285,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570222004}
   m_CullTransparentMesh: 1
+--- !u!114 &570222008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570222004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e58d93e2b2c5ec14b8d4d10626a04d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ruText: "\u0423\u043B\u0443\u0447\u0448\u0438\u0442\u044C"
+  _enText: Upgrade
 --- !u!1 &579732856
 GameObject:
   m_ObjectHideFlags: 0
@@ -2898,6 +2916,7 @@ GameObject:
   - component: {fileID: 695726021}
   - component: {fileID: 695726023}
   - component: {fileID: 695726022}
+  - component: {fileID: 695726024}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -3022,6 +3041,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 695726020}
   m_CullTransparentMesh: 1
+--- !u!114 &695726024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695726020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e58d93e2b2c5ec14b8d4d10626a04d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ruText: "\u0423\u043B\u0443\u0447\u0448\u0438\u0442\u044C"
+  _enText: Upgrade
 --- !u!1001 &698485125
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4294,6 +4327,7 @@ GameObject:
   - component: {fileID: 1085819374}
   - component: {fileID: 1085819376}
   - component: {fileID: 1085819375}
+  - component: {fileID: 1085819377}
   m_Layer: 5
   m_Name: Text (Upgrade)
   m_TagString: Untagged
@@ -4418,6 +4452,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1085819373}
   m_CullTransparentMesh: 1
+--- !u!114 &1085819377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085819373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e58d93e2b2c5ec14b8d4d10626a04d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ruText: "\u0414\u0430\u043B\u044C\u0448\u0435"
+  _enText: Next
 --- !u!1 &1115125982
 GameObject:
   m_ObjectHideFlags: 0
@@ -4882,6 +4930,7 @@ GameObject:
   - component: {fileID: 1197722875}
   - component: {fileID: 1197722877}
   - component: {fileID: 1197722876}
+  - component: {fileID: 1197722878}
   m_Layer: 5
   m_Name: Text (Upgrade)
   m_TagString: Untagged
@@ -5006,6 +5055,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1197722874}
   m_CullTransparentMesh: 1
+--- !u!114 &1197722878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197722874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e58d93e2b2c5ec14b8d4d10626a04d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ruText: "\u0423\u043B\u0443\u0447\u0448\u0438\u0442\u044C"
+  _enText: Upgrade
 --- !u!1001 &1200469338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5439,6 +5502,7 @@ GameObject:
   - component: {fileID: 1227230416}
   - component: {fileID: 1227230418}
   - component: {fileID: 1227230417}
+  - component: {fileID: 1227230419}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -5563,6 +5627,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227230415}
   m_CullTransparentMesh: 1
+--- !u!114 &1227230419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227230415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e58d93e2b2c5ec14b8d4d10626a04d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ruText: "\u041A\u0443\u043F\u0438\u0442\u044C"
+  _enText: Buy
 --- !u!1 &1281712986
 GameObject:
   m_ObjectHideFlags: 0
@@ -5724,6 +5802,7 @@ GameObject:
   - component: {fileID: 1344598035}
   - component: {fileID: 1344598037}
   - component: {fileID: 1344598036}
+  - component: {fileID: 1344598038}
   m_Layer: 5
   m_Name: Text (Upgrade)
   m_TagString: Untagged
@@ -5848,6 +5927,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1344598034}
   m_CullTransparentMesh: 1
+--- !u!114 &1344598038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344598034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e58d93e2b2c5ec14b8d4d10626a04d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ruText: "\u042D\u043A\u0438\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
+  _enText: Equip
 --- !u!1 &1381051610
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,13 +2,27 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class Note : InteractiveObject
 {
     [SerializeField] private Sprite _noteSprite;
     [TextArea(20, 25)] [SerializeField] private String _note;
+    [TextArea(20, 25)] [SerializeField] private String _noteEn;
     [SerializeField] private String _noteCloseButtonText = "Закрыть";
-    
+    [SerializeField] private String _noteCloseButtonTextEn = "Close";
+
+    protected override void Start()
+    {
+        base.Start();
+
+        if (YandexGame.lang == "en")
+        {
+            _note = _noteEn;
+            _noteCloseButtonText = _noteCloseButtonTextEn;
+        }
+    }
+
     public override void Interact()
     {
         GameManager.Instance.InteractButton.SetActive(false);

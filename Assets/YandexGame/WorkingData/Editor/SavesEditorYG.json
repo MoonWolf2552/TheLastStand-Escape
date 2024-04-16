@@ -1,5 +1,5 @@
 {
-    "idSave": 119,
+    "idSave": 122,
     "isFirstSession": false,
     "language": "en",
     "promptDone": false,
@@ -32,6 +32,7 @@
             }
         ],
         "HealthLevel": 2,
-        "StaminaLevel": 2
+        "StaminaLevel": 2,
+        "Sound": false
     }
 }
