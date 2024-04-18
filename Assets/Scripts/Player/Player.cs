@@ -1,0 +1,247 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using TMPro.EditorUtilities;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
+
+[System.Serializable]
+public class GunObject
+{
+    public GunType GunType;
+    public Gun Gun;
+}
+
+public class Player : MonoBehaviour
+{
+    public static Player Instance;
+
+    [SerializeField] private float _speed = 5f;
+    [SerializeField] private float _stamina = 3f;
+    [SerializeField] private float _maxStamina = 3f;
+    [SerializeField] private float _health = 10f;
+
+    [SerializeField] private Transform _playerModel;
+
+    [SerializeField] private Animator _animator;
+
+    [SerializeField] private Camera _camera;
+
+    [SerializeField] private GunObject[] _gunObjects;
+
+    private Stamina _staminaSlider;
+    private Health _healthSlider;
+
+    private Rigidbody _rigidbody;
+
+    public bool HaveKey;
+
+    public bool HaveSecondaryKey;
+
+    public int LastRoom;
+
+    public Door EnterDoor;
+
+    public InteractiveObject ObjectToInteract;
+
+    public bool IsRead;
+
+    public bool IsReload;
+
+    public bool IsDamaged;
+
+    [SerializeField] private bool _exit;
+    [SerializeField] private bool _arcade;
+
+    private bool _exitCoroutine;
+
+    [SerializeField] private ShopLibrary _shopLibrary;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
+        ActivateGun();
+    }
+
+    void Start()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+
+        PlayerData playerData = Progress.Instance.PlayerData;
+
+        _health = _shopLibrary.UpgradePrices[UpgradeType.Health][playerData.HealthLevel].value;
+        _maxStamina = _shopLibrary.UpgradePrices[UpgradeType.Stamina][playerData.StaminaLevel].value;
+        _stamina = _maxStamina;
+
+        _staminaSlider = FindObjectOfType<Stamina>();
+        _staminaSlider.GetComponent<Slider>().maxValue = _maxStamina;
+        _healthSlider = FindObjectOfType<Health>();
+        _healthSlider.GetComponent<Slider>().maxValue = _health;
+        _healthSlider.GetComponent<Slider>().value = _health;
+
+        _camera.GetComponent<AudioListener>().enabled = playerData.Sound;
+    }
+
+    void Update()
+    {
+        if (_exit)
+        {
+            if (_exitCoroutine) return;
+
+            StartCoroutine(ExitProcess());
+            _exitCoroutine = true;
+            
+            return;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (EnterDoor)
+            {
+                GameManager.Instance.EnterRoom();
+            }
+            else if (IsRead && ObjectToInteract)
+            {
+                GameManager.Instance.CloseNote();
+            }
+            else if (ObjectToInteract)
+            {
+                GameManager.Instance.Interact();
+            }
+        }
+
+        if (IsRead) return;
+
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
+            Input.mousePosition.y, -Camera.main.transform.position.y));
+        _playerModel.LookAt(mouseWorldPosition);
+        _playerModel.rotation = Quaternion.Euler(new Vector3(0, _playerModel.rotation.eulerAngles.y, 0));
+
+        if (IsReload) return;
+
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        Vector3 inputVector = new Vector3(horizontalInput, 0, verticalInput);
+
+        Vector3 worldVelocity = Vector3.zero;
+        if (inputVector == Vector3.zero)
+        {
+            _animator.SetTrigger("Idle");
+            
+            _stamina += 0.5f * Time.deltaTime;
+
+            if (_stamina > _maxStamina)
+            {
+                _stamina = _maxStamina;
+            }
+        }
+        else
+        {
+            if (Input.GetKey(KeyCode.LeftShift) && _stamina > 0 && inputVector != Vector3.zero)
+            {
+                worldVelocity = transform.TransformVector(inputVector) * (_speed * 2);
+
+                _stamina -= Time.deltaTime;
+
+                _animator.SetTrigger("Run");
+            }
+            else
+            {
+                worldVelocity = transform.TransformVector(inputVector) * _speed;
+
+                _stamina += 0.5f * Time.deltaTime;
+
+                if (_stamina > _maxStamina)
+                {
+                    _stamina = _maxStamina;
+                }
+                
+                _animator.SetTrigger("Walk");
+            }
+        }
+
+
+        _staminaSlider.GetComponent<Slider>().value = _stamina;
+
+        _rigidbody.velocity = new Vector3(worldVelocity.x, _rigidbody.velocity.y, worldVelocity.z);
+    }
+
+    public void MoveToSpawn()
+    {
+        PlayerSpawn[] playerSpawns = FindObjectsOfType<PlayerSpawn>();
+
+        foreach (PlayerSpawn playerSpawn in playerSpawns)
+        {
+            if (playerSpawn.LastRoom == LastRoom)
+            {
+                playerSpawn.MovePlayerToSpawn();
+                return;
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collider)
+    {
+        if (collider.gameObject.GetComponent<Enemy>() is Enemy enemy && !IsDamaged)
+        {
+            GetHit(enemy.Damage);
+        }
+    }
+
+    private void GetHit(float damage)
+    {
+        _health -= damage;
+        _healthSlider.GetComponent<Slider>().value = _health;
+
+        if (_health <= 0)
+        {
+            if (_arcade)
+            {
+                GameManager.Instance.ShowLoseArcade();
+                return;
+            }
+            GameManager.Instance.ShowLose();
+        }
+
+        StartCoroutine(HitProcess());
+    }
+
+    private IEnumerator HitProcess()
+    {
+        IsDamaged = true;
+        yield return new WaitForSeconds(0.3f);
+        IsDamaged = false;
+    }
+
+    public void ActivateGun()
+    {
+        foreach (GunObject gunObject in _gunObjects)
+        {
+            gunObject.Gun.gameObject.SetActive(gunObject.GunType == Progress.Instance.PlayerData.ActiveGun);
+        }
+    }
+
+    private IEnumerator ExitProcess()
+    {
+        _animator.SetTrigger("Walk");
+        Vector3 vector = transform.TransformVector(new Vector3(1, 0, 0)) * _speed;
+        _rigidbody.velocity = new Vector3(vector.x, _rigidbody.velocity.y, vector.z);
+
+        yield return new WaitForSeconds(2f);
+        
+        GameManager.Instance.ShowWin();
+    }
+}
