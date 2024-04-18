@@ -79,6 +79,11 @@ public class GameManager : MonoBehaviour
 
     public void LoadShelter()
     {
+        if (Player.Instance)
+        {
+            Destroy(Player.Instance.gameObject);
+        }
+        PlayUI.alpha = 1;
         SceneManager.LoadScene(0);
     }
     

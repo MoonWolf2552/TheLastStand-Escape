@@ -26,7 +26,7 @@ public class NextLevelDoor : Door
     {
         base.OnTriggerExit(collider);
         
-        GameManager.Instance.Requirement.gameObject.SetActive(false);
+        GameManager.Instance.RequirementGO.gameObject.SetActive(false);
         GameManager.Instance.Requirement.text = null;
     }
 }

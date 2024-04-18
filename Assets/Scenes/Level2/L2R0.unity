@@ -378,7 +378,7 @@ PrefabInstance:
     - target: {fileID: 3098337589566314199, guid: 7f2a30f53e87e8d49a5976cf4f5f1df5,
         type: 3}
       propertyPath: _levelNumber
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3098337589566314199, guid: 7f2a30f53e87e8d49a5976cf4f5f1df5,
         type: 3}
@@ -468,7 +468,7 @@ PrefabInstance:
     - target: {fileID: 5069207884749347886, guid: 9bc287a26c30b184094d7e8f6fb848d8,
         type: 3}
       propertyPath: _levelNumber
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5069207884749347886, guid: 9bc287a26c30b184094d7e8f6fb848d8,
         type: 3}
@@ -934,12 +934,12 @@ PrefabInstance:
     - target: {fileID: 8059814635870707068, guid: 6d9776739edf41b48b3633ac6dca7c39,
         type: 3}
       propertyPath: Level
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8059814635870707068, guid: 6d9776739edf41b48b3633ac6dca7c39,
         type: 3}
       propertyPath: _requirement
-      value: "\u041D\u0443\u0436\u0435\u043D Key"
+      value: "\u041D\u0443\u0436\u0435\u043D \u041A\u043B\u044E\u0447"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1637,7 +1637,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &1917841089
 Light:
   m_ObjectHideFlags: 0

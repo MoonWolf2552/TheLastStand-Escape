@@ -238,10 +238,14 @@ public class Player : MonoBehaviour
     {
         _animator.SetTrigger("Walk");
         Vector3 vector = transform.TransformVector(new Vector3(1, 0, 0)) * _speed;
-        _rigidbody.velocity = new Vector3(vector.x, _rigidbody.velocity.y, vector.z);
-
-        yield return new WaitForSeconds(2f);
         
+
+        for (float t = 0; t < 1f; t += Time.deltaTime / 5f)
+        {
+            _rigidbody.velocity = new Vector3(vector.x, _rigidbody.velocity.y, vector.z);
+            yield return null;
+        }
+
         GameManager.Instance.ShowWin();
     }
 }

@@ -92,10 +92,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5693c476ca6810d45b65a1df09b33032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 3
+  _health: 100
+  _foundRadius: 3
+  _money: 100
   _agent: {fileID: 6072160577707724689}
   _animator: {fileID: 4661053799754218170}
   _collider: {fileID: 6157394861875519554}
+  Damage: 5
+  Room: 0
 --- !u!1001 &4755440436925385290
 PrefabInstance:
   m_ObjectHideFlags: 0

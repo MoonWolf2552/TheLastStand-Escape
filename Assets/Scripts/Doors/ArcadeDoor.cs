@@ -8,6 +8,7 @@ public class ArcadeDoor : Door
     public override void Enter()
     {
         Destroy(Player.Instance.gameObject);
+        GameManager.Instance.InteractButton.gameObject.SetActive(false);
         SceneManager.LoadScene(2);
     }
 }
