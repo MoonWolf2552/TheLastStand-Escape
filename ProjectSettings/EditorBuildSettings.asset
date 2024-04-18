@@ -7,13 +7,16 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Shelter/Shelter.unity
-    guid: 00c432e7f750f884c9db463ef2215bc7
+    guid: 0bd01d3c447b9f240b5d85b4330a6d3e
+  - enabled: 1
+    path: Assets/Scenes/Exit/Exit.unity
+    guid: 6cd15cb7fee2c5644878cf0ab8ecad8a
+  - enabled: 1
+    path: Assets/Scenes/Arcade.unity
+    guid: dcce9d0bb0422524c91350c59f192e67
   - enabled: 1
     path: Assets/Scenes/Level1/L1R0.unity
     guid: cf8682faee3d16645b19c591b944c415
-  - enabled: 1
-    path: Assets/Scenes/Test/Level2/L2R0.unity
-    guid: eb20cb0c140b4924bb3a266c9db8df64
   - enabled: 1
     path: Assets/Scenes/Level1/L1R1.unity
     guid: b351bb3aac9385e46984743f6481435d
@@ -23,4 +26,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level1/L1R3.unity
     guid: d56046c49a378c741aa0c89a3499d695
+  - enabled: 1
+    path: Assets/Scenes/Level2/L2R0.unity
+    guid: 71d4ce96b043ba84b9c99b44c10f378b
+  - enabled: 1
+    path: Assets/Scenes/Level2/L2R1.unity
+    guid: 1174ae50431536244a72323194220aa0
+  - enabled: 1
+    path: Assets/Scenes/Level2/L2R2.unity
+    guid: 4b7d13901a392264998acdde0f94de65
   m_configObjects: {}
