@@ -9,11 +9,12 @@ using UnityEngine.SceneManagement;
 public class EnemyCounter : MonoBehaviour
 {
     public static EnemyCounter Instance;
-    
+
     [SerializeField] private RoomsLibrary _roomsLibrary;
     [SerializeField] private int _levelNumber;
 
     private Dictionary<int, List<Enemy>> _enemies = new Dictionary<int, List<Enemy>>();
+
     private void Awake()
     {
         if (Instance == null)
@@ -31,13 +32,13 @@ public class EnemyCounter : MonoBehaviour
     public void Count()
     {
         Enemy[] enemiesInScene = FindObjectsOfType<Enemy>();
-        
+
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int roomNumber = _roomsLibrary.GetSceneRoomNumber(_levelNumber, currentSceneIndex);
 
         if (!_enemies.ContainsKey(roomNumber))
         {
-            List<Enemy> enemiesInRoom = new List<Enemy>{};
+            List<Enemy> enemiesInRoom = new List<Enemy> { };
             foreach (Enemy enemy in enemiesInScene)
             {
                 if (enemy.Room == roomNumber)
@@ -45,9 +46,10 @@ public class EnemyCounter : MonoBehaviour
                     enemiesInRoom.Add(enemy);
                 }
             }
+
             _enemies.Add(roomNumber, enemiesInRoom);
         }
-        
+
         foreach (Enemy enemy in enemiesInScene)
         {
             if (enemy.Room == roomNumber)
@@ -75,7 +77,7 @@ public class EnemyCounter : MonoBehaviour
         {
             Destroy(key.gameObject);
         }
-        
+
         if (secondaryKey && Player.Instance.HaveSecondaryKey)
         {
             Destroy(secondaryKey.gameObject);
@@ -90,6 +92,14 @@ public class EnemyCounter : MonoBehaviour
             {
                 Destroy(enemy.gameObject);
             }
+        }
+    }
+
+    public void DestroyAllEnemiesArcade()
+    {
+        foreach (Enemy enemy in FindObjectsOfType<Enemy>())
+        {
+            Destroy(enemy.gameObject);
         }
     }
 }

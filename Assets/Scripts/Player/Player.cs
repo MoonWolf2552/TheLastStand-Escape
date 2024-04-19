@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
     public bool IsDamaged;
 
     [SerializeField] private bool _exit;
-    [SerializeField] private bool _arcade;
+    public bool Arcade;
 
     private bool _exitCoroutine;
 
@@ -72,12 +72,14 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
         
-        ActivateGun();
+        
     }
 
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        
+        ActivateGun();
 
         PlayerData playerData = Progress.Instance.PlayerData;
 
@@ -90,8 +92,8 @@ public class Player : MonoBehaviour
         _healthSlider = FindObjectOfType<Health>();
         _healthSlider.GetComponent<Slider>().maxValue = _health;
         _healthSlider.GetComponent<Slider>().value = _health;
-
-        _camera.GetComponent<AudioListener>().enabled = playerData.Sound;
+        
+        CheckSound();
     }
 
     void Update()
@@ -104,6 +106,16 @@ public class Player : MonoBehaviour
             _exitCoroutine = true;
             
             return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GameManager.Instance.EscapeObject.active)
+            {
+                GameManager.Instance.Continue();
+                return;
+            }
+            GameManager.Instance.Pause();
         }
         
         if (Input.GetKeyDown(KeyCode.F))
@@ -124,9 +136,13 @@ public class Player : MonoBehaviour
 
         if (IsRead) return;
 
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
-            Input.mousePosition.y, -Camera.main.transform.position.y));
-        _playerModel.LookAt(mouseWorldPosition);
+        if (Camera.main != null)
+        {
+            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
+                Input.mousePosition.y, -Camera.main.transform.position.y));
+            _playerModel.LookAt(mouseWorldPosition);
+        }
+
         _playerModel.rotation = Quaternion.Euler(new Vector3(0, _playerModel.rotation.eulerAngles.y, 0));
 
         if (IsReload) return;
@@ -208,7 +224,7 @@ public class Player : MonoBehaviour
 
         if (_health <= 0)
         {
-            if (_arcade)
+            if (Arcade)
             {
                 GameManager.Instance.ShowLoseArcade();
                 return;
@@ -228,8 +244,9 @@ public class Player : MonoBehaviour
 
     public void ActivateGun()
     {
+        
         foreach (GunObject gunObject in _gunObjects)
-        {
+        {Debug.Log(gunObject.GunType);
             gunObject.Gun.gameObject.SetActive(gunObject.GunType == Progress.Instance.PlayerData.ActiveGun);
         }
     }
@@ -247,5 +264,10 @@ public class Player : MonoBehaviour
         }
 
         GameManager.Instance.ShowWin();
+    }
+
+    public void CheckSound()
+    {
+        _camera.GetComponent<AudioListener>().enabled = Progress.Instance.PlayerData.Sound;
     }
 }
