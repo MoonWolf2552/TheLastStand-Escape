@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     public TMP_Text Money;
 
     public GameObject WinObject;
+    public TMP_Text ReceivedMoney;
+    public TMP_Text AllMoney;
     public GameObject LoseObject;
     public GameObject LoseArcadeObject;
     public GameObject EscapeObject;
@@ -46,6 +48,13 @@ public class GameManager : MonoBehaviour
     public GameObject ArcadeMenu;
 
     public CanvasGroup PlayUI;
+
+    public GameObject BlackScreen;
+
+    private bool _wait;
+
+    private string _prefix1 = "Получено монет ";
+    private string _prefix2 = "Всего монет ";
 
     private void Awake()
     {
@@ -61,16 +70,31 @@ public class GameManager : MonoBehaviour
 
         EnterButton.gameObject.SetActive(false);
         InteractButton.gameObject.SetActive(false);
+        RequirementGO.gameObject.SetActive(false);
         NoteImageBackgroung.gameObject.SetActive(false);
         NewsImageBackgroung.gameObject.SetActive(false);
-        RequirementGO.gameObject.SetActive(false);
 
         YandexGame.RewardVideoEvent += RestartArcade;
+    }
+
+    public void DisableObjects()
+    {
+        EnterButton.gameObject.SetActive(false);
+        InteractButton.gameObject.SetActive(false);
+        RequirementGO.gameObject.SetActive(false);
+        NoteImageBackgroung.gameObject.SetActive(false);
+        NewsImageBackgroung.gameObject.SetActive(false);
     }
 
     private void Start()
     {
         Money.text = Progress.Instance.PlayerData.Money.ToString();
+
+        if (YandexGame.lang == "en")
+        {
+            _prefix1 = "Сoins received ";
+            _prefix2 = "Total coins ";
+        }
     }
 
     public void LoadRoom(int roomIndex)
@@ -81,6 +105,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(int level)
     {
+        BlackScreen.SetActive(true);
         PlayUI.alpha = 1;
         Destroy(Player.Instance.gameObject);
 
@@ -91,6 +116,14 @@ public class GameManager : MonoBehaviour
     public void LoadShelter()
     {
         Time.timeScale = 1;
+        
+        if (!_wait)
+        {
+            StartCoroutine(WaitProcess(LoadShelter));
+            return;
+        }
+
+        _wait = false;
         
         if (EnemyCounter.Instance)
         {
@@ -111,6 +144,9 @@ public class GameManager : MonoBehaviour
         }
 
         PlayUI.alpha = 1;
+        
+        AddMoney();
+        
         SceneManager.LoadScene(0);
     }
 
@@ -134,15 +170,31 @@ public class GameManager : MonoBehaviour
         Money.text = Progress.Instance.PlayerData.Money.ToString();
     }
 
+    public void AddMoneyLevel()
+    {
+        Money.text = Player.Instance.Money.ToString();
+    }
+
     public void ShowWin()
     {
         WinObject.SetActive(true);
+        ReceivedMoney.text = _prefix1 + Money.text;
+        AllMoney.text =  _prefix2 +Progress.Instance.PlayerData.Money.ToString();
         PlayUI.alpha = 0;
+
+        Progress.Instance.PlayerData.Money += Player.Instance.Money;
+        Progress.Instance.Save();
     }
 
     public void Next()
     {
-        Debug.Log(Progress.Instance.PlayerData.Level);
+        if (!_wait)
+        {
+            StartCoroutine(WaitProcess(Next));
+            return;
+        }
+
+        _wait = false;
         LoadLevel(Progress.Instance.PlayerData.Level + 1);
     }
 
@@ -172,6 +224,15 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
+        Time.timeScale = 1;
+        if (!_wait)
+        {
+            StartCoroutine(WaitProcess(Restart));
+            return;
+        }
+
+        _wait = false;
+        
         if (Player.Instance.Arcade)
         {
             YandexGame.RewVideoShow(0);
@@ -179,7 +240,6 @@ public class GameManager : MonoBehaviour
         }
 
         PlayUI.alpha = 1;
-        Time.timeScale = 1;
 
         if (EnemyCounter.Instance)
         {
@@ -220,6 +280,13 @@ public class GameManager : MonoBehaviour
     public void Exit()
     {
         PlayUI.alpha = 0;
+        if (!_wait)
+        {
+            StartCoroutine(WaitProcess(Exit));
+            return;
+        }
+
+        _wait = false;
         Destroy(Player.Instance.gameObject);
 
         Progress.Instance.PlayerData.Level++;
@@ -262,7 +329,25 @@ public class GameManager : MonoBehaviour
         ArcadeMenu.SetActive(true);
 
         Player.Instance.IsRead = true;
+    }
 
-        Time.timeScale = 0;
+    public void Go()
+    {
+        if (!_wait)
+        {
+            StartCoroutine(WaitProcess(Go));
+            return;
+        }
+
+        _wait = false;
+        Player.Instance.EnterDoor.Go();
+    }
+
+    private IEnumerator WaitProcess(Action method)
+    {
+        BlackScreen.SetActive(true);
+        _wait = true;
+        yield return new WaitForSeconds(0.34f);
+        method();
     }
 }

@@ -8,6 +8,7 @@ public class Starter : MonoBehaviour
     void Start()
     {
         Player.Instance.MoveToSpawn();
+        StartCoroutine(Player.Instance.ScreenRemove());
         EnemyCounter.Instance.Count();
     }
 }

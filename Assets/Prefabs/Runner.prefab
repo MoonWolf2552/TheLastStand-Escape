@@ -68,7 +68,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3
+  m_Speed: 4.6
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -94,11 +94,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 50
   _foundRadius: 3
-  _money: 100
+  _money: 50
   _agent: {fileID: 5744318061044180701}
   _animator: {fileID: 6212472620935703066}
   _collider: {fileID: 7276381296740808908}
-  Damage: 5
+  Damage: 8
   Room: 0
 --- !u!1001 &530781846543718283
 PrefabInstance:

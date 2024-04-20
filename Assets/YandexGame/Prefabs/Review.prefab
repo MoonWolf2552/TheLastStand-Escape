@@ -32,6 +32,7 @@ RectTransform:
   m_Children:
   - {fileID: 4599446247503720890}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -58,9 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50aa89408dd46a4d9e4c2ed0c463947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forUnauthorized: 0
-  showOnMobileDevice: 0
-  updateDataOnEnable: 0
+  authDialog: 1
   ReviewAvailable:
     m_PersistentCalls:
       m_Calls:
@@ -129,6 +128,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4599446247503720890}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -189,7 +189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f34f36451b093ee4c83ad4aa5459d2ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textLComponent: {fileID: 0}
+  textUIComponent: {fileID: 4599446247275314326}
+  textMeshComponent: {fileID: 0}
   infoYG: {fileID: 11400000, guid: 162644796a8b0d044bce3d6fda0641e3, type: 2}
   text: Review
   ru: "\u041E\u0441\u0442\u0430\u0432\u0438\u0442\u044C \u043E\u0442\u0437\u044B\u0432"
@@ -219,10 +220,8 @@ MonoBehaviour:
   it: 
   de: 
   hi: 
-  changeOnlyFont: 0
   fontNumber: 0
   uniqueFont: {fileID: 0}
-  additionalText: {fileID: 0}
   textHeight: 20
   processTranslateLabel: 3/3 completed
   componentTextField: 1
@@ -261,6 +260,7 @@ RectTransform:
   - {fileID: 4599446247275314320}
   - {fileID: 6363603300602355557}
   m_Father: {fileID: 4599446247094708738}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -392,6 +392,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4599446247503720890}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

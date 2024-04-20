@@ -39,4 +39,9 @@ public class Door : MonoBehaviour
     {
         
     }
+    
+    public virtual void Go()
+    {
+        
+    }
 }

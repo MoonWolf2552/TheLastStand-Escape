@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class ShelterDoor : NextLevelDoor
 {
@@ -13,13 +14,22 @@ public class ShelterDoor : NextLevelDoor
 
     public override void Enter()
     {
-        Destroy(Player.Instance.gameObject);
-        
         if (EnemyCounter.Instance)
         {
             EnemyCounter.Instance.DestroyAllEnemies();
             Destroy(EnemyCounter.Instance.gameObject);
         }
+        
+        GameManager.Instance.Go();
+    }
+
+    public override void Go()
+    {
+        base.Go();
+
+        YandexGame.FullscreenShow();
+        
+        Destroy(Player.Instance.gameObject);
         
         GameManager.Instance.LoadLevel(Level + 1);
         GameManager.Instance.EnterButton.SetActive(false);

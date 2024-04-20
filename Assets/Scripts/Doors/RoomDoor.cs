@@ -34,13 +34,20 @@ public class RoomDoor : Door
         }
         
         GameManager.Instance.RequirementGO.gameObject.SetActive(false);
+        GameManager.Instance.Go();
+    }
 
+    public override void Go()
+    {
+        base.Go();
+        
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int roomNumber = _roomsLibrary.GetSceneRoomNumber(_levelNumber, currentSceneIndex);
 
         Player.Instance.LastRoom = roomNumber;
 
         int roomIndex = _roomsLibrary.GetRoomSceneIndex(_levelNumber, _roomNumber);
+        GameManager.Instance.BlackScreen.SetActive(true);
         GameManager.Instance.LoadRoom(roomIndex);
     }
 

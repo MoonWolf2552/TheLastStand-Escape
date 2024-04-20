@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using TMPro.EditorUtilities;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -54,9 +53,14 @@ public class Player : MonoBehaviour
     public bool IsDamaged;
 
     [SerializeField] private bool _exit;
+
     public bool Arcade;
 
     private bool _exitCoroutine;
+
+    private bool _canRun = true;
+
+    public int Money;
 
     [SerializeField] private ShopLibrary _shopLibrary;
 
@@ -71,14 +75,12 @@ public class Player : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
-        
     }
 
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        
+
         ActivateGun();
 
         PlayerData playerData = Progress.Instance.PlayerData;
@@ -92,8 +94,12 @@ public class Player : MonoBehaviour
         _healthSlider = FindObjectOfType<Health>();
         _healthSlider.GetComponent<Slider>().maxValue = _health;
         _healthSlider.GetComponent<Slider>().value = _health;
-        
+
+        GameManager.Instance.DisableObjects();
+        GameManager.Instance.AddMoneyLevel();
+
         CheckSound();
+        StartCoroutine(ScreenRemove());
     }
 
     void Update()
@@ -104,10 +110,10 @@ public class Player : MonoBehaviour
 
             StartCoroutine(ExitProcess());
             _exitCoroutine = true;
-            
+
             return;
         }
-
+        
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GameManager.Instance.EscapeObject.active)
@@ -115,6 +121,7 @@ public class Player : MonoBehaviour
                 GameManager.Instance.Continue();
                 return;
             }
+
             GameManager.Instance.Pause();
         }
         
@@ -156,7 +163,7 @@ public class Player : MonoBehaviour
         if (inputVector == Vector3.zero)
         {
             _animator.SetTrigger("Idle");
-            
+
             _stamina += 0.5f * Time.deltaTime;
 
             if (_stamina > _maxStamina)
@@ -166,7 +173,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (Input.GetKey(KeyCode.LeftShift) && _stamina > 0 && inputVector != Vector3.zero)
+            if (Input.GetKey(KeyCode.LeftShift) && _canRun && inputVector != Vector3.zero)
             {
                 worldVelocity = transform.TransformVector(inputVector) * (_speed * 2);
 
@@ -184,9 +191,18 @@ public class Player : MonoBehaviour
                 {
                     _stamina = _maxStamina;
                 }
-                
+
                 _animator.SetTrigger("Walk");
             }
+        }
+
+        if (_stamina <= 0)
+        {
+            _canRun = false;
+        }
+        else if (_stamina >= _maxStamina / 2)
+        {
+            _canRun = true;
         }
 
 
@@ -209,12 +225,24 @@ public class Player : MonoBehaviour
         }
     }
 
+    public IEnumerator ScreenRemove()
+    {
+        GameManager.Instance.BlackScreen.GetComponent<Animator>().SetTrigger("Hide");
+        IsRead = true;
+        yield return new WaitForSeconds(0.25f);
+        GameManager.Instance.BlackScreen.SetActive(false);
+        IsRead = false;
+    }
+
     private void OnCollisionEnter(Collision collider)
     {
         if (collider.gameObject.GetComponent<Enemy>() is Enemy enemy && !IsDamaged)
         {
             GetHit(enemy.Damage);
         }
+
+        collider.gameObject.GetComponent<Collider>().enabled = false;
+        collider.gameObject.GetComponent<Collider>().enabled = true;
     }
 
     private void GetHit(float damage)
@@ -229,6 +257,7 @@ public class Player : MonoBehaviour
                 GameManager.Instance.ShowLoseArcade();
                 return;
             }
+
             GameManager.Instance.ShowLose();
         }
 
@@ -238,15 +267,14 @@ public class Player : MonoBehaviour
     private IEnumerator HitProcess()
     {
         IsDamaged = true;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.6f);
         IsDamaged = false;
     }
 
     public void ActivateGun()
     {
-        
         foreach (GunObject gunObject in _gunObjects)
-        {Debug.Log(gunObject.GunType);
+        {
             gunObject.Gun.gameObject.SetActive(gunObject.GunType == Progress.Instance.PlayerData.ActiveGun);
         }
     }
@@ -255,7 +283,7 @@ public class Player : MonoBehaviour
     {
         _animator.SetTrigger("Walk");
         Vector3 vector = transform.TransformVector(new Vector3(1, 0, 0)) * _speed;
-        
+
 
         for (float t = 0; t < 1f; t += Time.deltaTime / 5f)
         {
@@ -268,6 +296,13 @@ public class Player : MonoBehaviour
 
     public void CheckSound()
     {
-        _camera.GetComponent<AudioListener>().enabled = Progress.Instance.PlayerData.Sound;
+        if (Progress.Instance.PlayerData.Sound)
+        {
+            AudioListener.volume = 1;
+        }
+        else
+        {
+            AudioListener.volume = 0;
+        }
     }
 }

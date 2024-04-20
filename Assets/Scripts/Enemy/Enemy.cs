@@ -94,10 +94,9 @@ public class Enemy : MonoBehaviour
         _isHitted = true;
         _agent.SetDestination(transform.position);
         
-        yield return new WaitForSeconds(0.53f);
+        yield return new WaitForSeconds(0.17f);
         
         _isHitted = false;
-        _animator.ResetTrigger("Hit");
         _animator.SetTrigger("Found");
         
         yield return new WaitForSeconds(0.53f);
@@ -115,8 +114,27 @@ public class Enemy : MonoBehaviour
         _animator.SetTrigger("Die");
         _collider.enabled = false;
 
-        Progress.Instance.PlayerData.Money += _money;
-        Progress.Instance.Save();
-        GameManager.Instance.AddMoney();
+        if (Player.Instance.Arcade)
+        {
+            Progress.Instance.PlayerData.Money += _money;
+            GameManager.Instance.AddMoney();
+            Progress.Instance.Save();
+        }
+        else
+        {
+            Player.Instance.Money += _money;
+            GameManager.Instance.AddMoneyLevel();
+        }
+        
+        if (Player.Instance.Arcade)
+        {
+            StartCoroutine(DieCountdown());
+        }
+    }
+
+    public IEnumerator DieCountdown()
+    {
+        yield return new WaitForSeconds(20);
+        Destroy(gameObject);
     }
 }
