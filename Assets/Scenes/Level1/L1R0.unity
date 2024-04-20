@@ -134,12 +134,20 @@ PrefabInstance:
     - target: {fileID: 2875243729523801173, guid: 177c8378a132c7348ab86488f0c4df16,
         type: 3}
       propertyPath: _note
-      value: "T\u0443\u0442\u043E\u0440\u0438\u0430\u043B"
+      value: "\u0412\u0430\u0448\u0430 \u0437\u0430\u0434\u0430\u0447\u0430: \u0432\u044B\u0439\u0442\u0438
+        \u043E\u0442\u0441\u044E\u0434\u0430 \u0432 \u0434\u0432\u0435\u0440\u044C
+        \u0443 \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0432\u044B \u043F\u043E\u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F
+        \u043F\u0435\u0440\u0432\u044B\u0439 \u0440\u0430\u0437, \u0434\u043B\u044F
+        \u044D\u0442\u043E\u0433\u043E \u0432\u0430\u043C \u043D\u0430\u0434\u043E
+        \u0438\u0433\u0440\u0430\u0442\u044C \u043A\u043B\u044E\u0447, \u043F\u0440\u043E\u0439\u0434\u0438\u0442\u0435
+        \u0432 \u0441\u043B\u0435\u0434\u044F\u0449\u0435\u044E \u043A\u043E\u043C\u043D\u0430\u0442\u0443."
       objectReference: {fileID: 0}
     - target: {fileID: 2875243729523801173, guid: 177c8378a132c7348ab86488f0c4df16,
         type: 3}
       propertyPath: _noteEn
-      value: Tutorial
+      value: Your task is to get out of here through the door at which you appear
+        for the first time, for this you need to play the key, go into the tracking
+        room.
       objectReference: {fileID: 0}
     - target: {fileID: 2875243729523801173, guid: 177c8378a132c7348ab86488f0c4df16,
         type: 3}
@@ -3369,7 +3377,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &1917841089
 Light:
   m_ObjectHideFlags: 0
