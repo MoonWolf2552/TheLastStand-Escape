@@ -43,6 +43,7 @@ public class PlayerData
     public int HealthLevel;
     public int StaminaLevel;
     public bool Sound = true;
+    public int Kills;
 }
 
 public class Progress : MonoBehaviour

@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using YG;
 
 public class Enemy : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class Enemy : MonoBehaviour
     public int Room;
 
     private Transform _playerTransform;
+    
+    [SerializeField] private AudioSource _idleAudio;
+    [SerializeField] private AudioSource _hitAudio;
 
     private void Start()
     {
@@ -90,16 +94,22 @@ public class Enemy : MonoBehaviour
     
     private IEnumerator HitProcess()
     {
+        _idleAudio.mute = true;
+        _hitAudio.Play();
         _collider.enabled = false;
         _isHitted = true;
         _agent.SetDestination(transform.position);
         
-        yield return new WaitForSeconds(0.17f);
+        yield return new WaitForSeconds(0.15f);
         
         _isHitted = false;
         _animator.SetTrigger("Found");
         
-        yield return new WaitForSeconds(0.53f);
+        yield return new WaitForSeconds(0.25f);
+        
+        _idleAudio.mute = false;
+        
+        yield return new WaitForSeconds(0.28f);
         
         _collider.enabled = true;
     }
@@ -111,9 +121,15 @@ public class Enemy : MonoBehaviour
         _agent.isStopped = true;
         _agent.speed = 0f;
         
+        _idleAudio.mute = true;
+        _hitAudio.Play();
+        
         _animator.SetTrigger("Die");
         _collider.enabled = false;
 
+        Progress.Instance.PlayerData.Kills++;
+        YandexGame.NewLeaderboardScores("KillsLeaderboard", Progress.Instance.PlayerData.Kills);
+        Progress.Instance.Save();
         if (Player.Instance.Arcade)
         {
             Progress.Instance.PlayerData.Money += _money;

@@ -56,6 +56,10 @@ public class GameManager : MonoBehaviour
     private string _prefix1 = "Получено монет ";
     private string _prefix2 = "Всего монет ";
 
+    [SerializeField] private AudioSource _audioSource;
+
+    public LeaderboardYG KillsLeaderboard;
+
     private void Awake()
     {
         if (Instance == null)
@@ -310,6 +314,7 @@ public class GameManager : MonoBehaviour
         _soundChecker.CheckSound();
 
         Player.Instance.IsRead = true;
+        Player.Instance.AudioSourceBackGround.mute = true;
 
         Time.timeScale = 0;
     }
@@ -320,6 +325,7 @@ public class GameManager : MonoBehaviour
         ArcadeMenu.SetActive(false);
 
         Player.Instance.IsRead = false;
+        Player.Instance.AudioSourceBackGround.mute = false;
 
         Time.timeScale = 1;
     }
@@ -345,9 +351,10 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator WaitProcess(Action method)
     {
+        _audioSource.Play();
         BlackScreen.SetActive(true);
         _wait = true;
-        yield return new WaitForSeconds(0.34f);
+        yield return new WaitForSeconds(0.7f);
         method();
     }
 }

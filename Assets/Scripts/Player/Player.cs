@@ -63,6 +63,14 @@ public class Player : MonoBehaviour
     public int Money;
 
     [SerializeField] private ShopLibrary _shopLibrary;
+    
+    public AudioSource AudioSourceBackGround;
+    
+    [SerializeField] private AudioSource _audioSource;
+    
+    private float _soundTimer;
+    private float _stepPeriod = 0.45f;
+    private float _stepRunPeriod = 0.35f;
 
     private void Awake()
     {
@@ -104,6 +112,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        _soundTimer += Time.deltaTime;
         if (_exit)
         {
             if (_exitCoroutine) return;
@@ -178,6 +187,12 @@ public class Player : MonoBehaviour
                 worldVelocity = transform.TransformVector(inputVector) * (_speed * 2);
 
                 _stamina -= Time.deltaTime;
+                
+                if (_soundTimer >= _stepRunPeriod)
+                {
+                    _audioSource.Play();
+                    _soundTimer = 0;
+                }
 
                 _animator.SetTrigger("Run");
             }
@@ -186,6 +201,12 @@ public class Player : MonoBehaviour
                 worldVelocity = transform.TransformVector(inputVector) * _speed;
 
                 _stamina += 0.5f * Time.deltaTime;
+                
+                if (_soundTimer >= _stepPeriod)
+                {
+                    _audioSource.Play();
+                    _soundTimer = 0;
+                }
 
                 if (_stamina > _maxStamina)
                 {
@@ -287,6 +308,12 @@ public class Player : MonoBehaviour
 
         for (float t = 0; t < 1f; t += Time.deltaTime / 5f)
         {
+            if (_soundTimer >= _stepPeriod)
+            {
+                _audioSource.Play();
+                _soundTimer = 0;
+            }
+            
             _rigidbody.velocity = new Vector3(vector.x, _rigidbody.velocity.y, vector.z);
             yield return null;
         }

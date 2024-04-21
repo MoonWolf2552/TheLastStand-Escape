@@ -27,6 +27,9 @@ public class Gun : MonoBehaviour
     private TMP_Text _ammoText;
 
     [SerializeField] private ShopLibrary _shopLibrary;
+    
+    [SerializeField] private AudioSource _fireAudio;
+    [SerializeField] private AudioSource _reloadAudio;
 
     private void Start()
     {
@@ -72,6 +75,7 @@ public class Gun : MonoBehaviour
             {
                 if (_ammo > 0)
                 {
+                    _fireAudio.Play();
                     Fire();
                     _timer = 0;
                 }
@@ -88,6 +92,7 @@ public class Gun : MonoBehaviour
         Bullet newBullet = Instantiate(_bullet, _bulletSpawn.position, _bulletSpawn.rotation);
         newBullet.Damage = _damage;
         newBullet.GetComponent<Rigidbody>().velocity = _bulletSpawn.forward * _bulletSpeed;
+        
         _ammo--;
         _ammoText.text = $"{_ammo}/{_maxAmmo}";
     }
@@ -95,10 +100,12 @@ public class Gun : MonoBehaviour
     private IEnumerator Reload()
     {
         Player.Instance.IsReload = true;
+        
+        _reloadAudio.Play();
 
         _isReload = true;
         
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.8f);
 
         _isReload = false;
 
