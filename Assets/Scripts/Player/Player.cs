@@ -72,6 +72,8 @@ public class Player : MonoBehaviour
     private float _stepPeriod = 0.45f;
     private float _stepRunPeriod = 0.35f;
 
+    [SerializeField] private bool _firstRoom;
+
     private void Awake()
     {
         if (Instance == null)
@@ -81,7 +83,13 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            if (_firstRoom)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Destroy(Instance.gameObject);
+            Instance = this;
         }
     }
 
@@ -104,7 +112,14 @@ public class Player : MonoBehaviour
         _healthSlider.GetComponent<Slider>().value = _health;
 
         GameManager.Instance.DisableObjects();
-        GameManager.Instance.AddMoneyLevel();
+        if (Arcade)
+        {
+            GameManager.Instance.AddMoney();
+        }
+        else
+        {
+           GameManager.Instance.AddMoneyLevel(); 
+        }
 
         CheckSound();
         StartCoroutine(ScreenRemove());
@@ -250,7 +265,7 @@ public class Player : MonoBehaviour
     {
         GameManager.Instance.BlackScreen.GetComponent<Animator>().SetTrigger("Hide");
         IsRead = true;
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.7f);
         GameManager.Instance.BlackScreen.SetActive(false);
         IsRead = false;
     }

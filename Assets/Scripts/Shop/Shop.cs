@@ -63,6 +63,14 @@ public class Shop : MonoBehaviour
 
     public void OpenGunShop()
     {
+        foreach (GunButtonTypes gun in Guns)
+        {
+            gun.gameObject.SetActive(false);
+        }
+        BuyButton.gameObject.SetActive(false);
+        UpgradeButton.gameObject.SetActive(false);
+        EquipButton.gameObject.SetActive(false);
+        
         _gun = 0;
         Guns[_gun].gameObject.SetActive(true);
 

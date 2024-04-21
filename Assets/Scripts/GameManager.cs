@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
 
     private string _prefix1 = "Получено монет ";
     private string _prefix2 = "Всего монет ";
+    private int _levelMoney;
 
     [SerializeField] private AudioSource _audioSource;
 
@@ -78,7 +79,7 @@ public class GameManager : MonoBehaviour
         NoteImageBackgroung.gameObject.SetActive(false);
         NewsImageBackgroung.gameObject.SetActive(false);
 
-        YandexGame.RewardVideoEvent += RestartArcade;
+        YandexGame.RewardVideoEvent += Reward;
     }
 
     public void DisableObjects()
@@ -111,7 +112,6 @@ public class GameManager : MonoBehaviour
     {
         BlackScreen.SetActive(true);
         PlayUI.alpha = 1;
-        Destroy(Player.Instance.gameObject);
 
         int levelIndex = _levelLibrary.GetLevelSceneIndex(level);
         SceneManager.LoadScene(levelIndex);
@@ -141,11 +141,7 @@ public class GameManager : MonoBehaviour
             }
             Destroy(EnemyCounter.Instance.gameObject);
         }
-
-        if (Player.Instance)
-        {
-            Destroy(Player.Instance.gameObject);
-        }
+       
 
         PlayUI.alpha = 1;
         
@@ -182,11 +178,14 @@ public class GameManager : MonoBehaviour
     public void ShowWin()
     {
         WinObject.SetActive(true);
-        ReceivedMoney.text = _prefix1 + Money.text;
-        AllMoney.text =  _prefix2 +Progress.Instance.PlayerData.Money.ToString();
+        
         PlayUI.alpha = 0;
 
-        Progress.Instance.PlayerData.Money += Player.Instance.Money;
+        Progress.Instance.PlayerData.Money += _levelMoney;
+        
+        ReceivedMoney.text = _prefix1 + _levelMoney;
+        AllMoney.text =  _prefix2 + Progress.Instance.PlayerData.Money;
+        
         Progress.Instance.Save();
     }
 
@@ -234,14 +233,8 @@ public class GameManager : MonoBehaviour
             StartCoroutine(WaitProcess(Restart));
             return;
         }
-
-        _wait = false;
         
-        if (Player.Instance.Arcade)
-        {
-            YandexGame.RewVideoShow(0);
-            return;
-        }
+        _wait = false;
 
         PlayUI.alpha = 1;
 
@@ -250,18 +243,28 @@ public class GameManager : MonoBehaviour
             EnemyCounter.Instance.DestroyAllEnemies();
             Destroy(EnemyCounter.Instance.gameObject);
         }
-        
-        if (Player.Instance)
-        {
-            Destroy(Player.Instance.gameObject);
-        }
-
-        
 
         LoadLevel(Progress.Instance.PlayerData.Level + 1);
     }
 
-    private void RestartArcade(int index)
+    public void StartArcade()
+    {
+        if (!_wait)
+        {
+            StartCoroutine(WaitProcess(StartArcade));
+            return;
+        }
+        
+        _wait = false;
+        YandexGame.RewVideoShow(0);
+    }
+
+    private void Reward(int index)
+    {
+        RestartArcade();
+    }
+
+    private void RestartArcade()
     {
         PlayUI.alpha = 1;
         Time.timeScale = 1;
@@ -271,11 +274,6 @@ public class GameManager : MonoBehaviour
             EnemyCounter.Instance.DestroyAllEnemiesArcade();
             Destroy(EnemyCounter.Instance.gameObject);
         }
-        
-        if (Player.Instance)
-        {
-            Destroy(Player.Instance.gameObject);
-        }
 
         SceneManager.LoadScene(2);
     }
@@ -283,6 +281,7 @@ public class GameManager : MonoBehaviour
     [ContextMenu("Exit")]
     public void Exit()
     {
+        _levelMoney = Convert.ToInt32(Money.text);
         PlayUI.alpha = 0;
         if (!_wait)
         {
@@ -291,7 +290,6 @@ public class GameManager : MonoBehaviour
         }
 
         _wait = false;
-        Destroy(Player.Instance.gameObject);
 
         Progress.Instance.PlayerData.Level++;
         Progress.Instance.Save();
