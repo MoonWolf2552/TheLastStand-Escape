@@ -1,2 +1,2 @@
 Build path: E:/Unity Rider/Projects/Game/Build
-Build number: 9
+Build number: 12

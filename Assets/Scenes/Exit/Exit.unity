@@ -1710,6 +1710,11 @@ PrefabInstance:
       propertyPath: IsRead
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1061412908226151857, guid: 14f1b696c6b9f92488e2a08c530b2686,
+        type: 3}
+      propertyPath: _firstRoom
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1665260485255001096, guid: 14f1b696c6b9f92488e2a08c530b2686,
         type: 3}
       propertyPath: m_LocalRotation.w
