@@ -74,6 +74,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private bool _firstRoom;
 
+    public int HealCount = 1;
+
     private void Awake()
     {
         if (Instance == null)
@@ -300,6 +302,13 @@ public class Player : MonoBehaviour
         StartCoroutine(HitProcess());
     }
 
+    public void Heal()
+    {
+        HealCount--;
+        _health = _shopLibrary.UpgradePrices[UpgradeType.Health][Progress.Instance.PlayerData.HealthLevel].value;
+        _healthSlider.GetComponent<Slider>().value = _health;
+    }
+
     private IEnumerator HitProcess()
     {
         IsDamaged = true;
@@ -332,6 +341,8 @@ public class Player : MonoBehaviour
             _rigidbody.velocity = new Vector3(vector.x, _rigidbody.velocity.y, vector.z);
             yield return null;
         }
+        
+        _animator.SetTrigger("Idle");
 
         GameManager.Instance.ShowWin();
     }

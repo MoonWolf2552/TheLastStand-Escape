@@ -44,17 +44,17 @@ public class Gun : MonoBehaviour
 
         _ammo = _maxAmmo;
 
-        if (Name == GunType.Pistol)
+        if (Name == GunType.Pistol && GunLevel > 0)
         {
             _damage = _shopLibrary.GunPrices[Name][GunLevel].value;
             _shotPeriod = 0.6f;
         }
-        else if (Name == GunType.Automatic)
+        else if (Name == GunType.Automatic && GunLevel > 0)
         {
             _shotPeriod = _shopLibrary.GunPrices[Name][GunLevel].value;
             _damage = 7;
         }
-        else
+        else if (Name == GunType.Shotgun && GunLevel > 0)
         {
             _damage = _shopLibrary.GunPrices[Name][GunLevel].value;
         }

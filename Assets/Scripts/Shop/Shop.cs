@@ -224,7 +224,7 @@ public class Shop : MonoBehaviour
         {
             if (gunData.Name == name)
             {
-                int price = GunPrices[name][gunData.GunLevel].price;
+                int price = GunPrices[name][gunData.GunLevel + 1].price;
 
                 if (playerData.Money >= price)
                 {

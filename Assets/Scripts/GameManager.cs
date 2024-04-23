@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private AudioSource _audioSource;
 
-    public LeaderboardYG KillsLeaderboard;
+    public Button HealButton;
 
     private void Awake()
     {
@@ -243,6 +243,7 @@ public class GameManager : MonoBehaviour
             EnemyCounter.Instance.DestroyAllEnemies();
             Destroy(EnemyCounter.Instance.gameObject);
         }
+        Destroy(Player.Instance.gameObject);
 
         LoadLevel(Progress.Instance.PlayerData.Level + 1);
     }
@@ -261,7 +262,20 @@ public class GameManager : MonoBehaviour
 
     private void Reward(int index)
     {
-        RestartArcade();
+        if (index == 0)
+        {
+            RestartArcade();
+        }
+        else if (index == 1)
+        {
+            HealPlayer();
+        }
+    }
+
+    private void HealPlayer()
+    {
+        Player.Instance.Heal();
+        HealButton.gameObject.SetActive(Player.Instance.HealCount > 0);
     }
 
     private void RestartArcade()
@@ -305,7 +319,10 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
+        HealButton.gameObject.SetActive(Player.Instance.HealCount > 0);
+
         RestartEscapeButton.gameObject.SetActive(!Player.Instance.Arcade);
+        HealButton.gameObject.SetActive(!Player.Instance.Arcade);
 
         EscapeObject.SetActive(true);
 
