@@ -972,6 +972,7 @@ MonoBehaviour:
   AudioSourceBackGround: {fileID: 2519154772598618688}
   _audioSource: {fileID: 572970212213368403}
   _firstRoom: 1
+  HealCount: 1
 --- !u!82 &572970212213368403
 AudioSource:
   m_ObjectHideFlags: 0
