@@ -39,13 +39,13 @@ MonoBehaviour:
     LevelsPrices:
     - Level: 1
       Price: 1000
-      Value: 2
+      Value: 4
     - Level: 2
       Price: 1200
-      Value: 4
+      Value: 6
     - Level: 3
       Price: 1700
-      Value: 8
+      Value: 7
   UpgradeLevelsPrices:
   - Type: 1
     LevelsPrices:

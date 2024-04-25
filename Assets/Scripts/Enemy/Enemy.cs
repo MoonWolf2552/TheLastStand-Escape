@@ -13,9 +13,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _foundRadius = 3f;
     [SerializeField] private int _money = 100;
     [SerializeField] private NavMeshAgent _agent;
-    
+
     [SerializeField] private Animator _animator;
-    
+
     [SerializeField] private Collider _collider;
 
     public float Damage = 5;
@@ -27,9 +27,12 @@ public class Enemy : MonoBehaviour
     public int Room;
 
     private Transform _playerTransform;
-    
+
     [SerializeField] private AudioSource _idleAudio;
     [SerializeField] private AudioSource _hitAudio;
+
+    private int _hitCount;
+    private bool _hitAudioCheck;
 
     private void Start()
     {
@@ -70,7 +73,7 @@ public class Enemy : MonoBehaviour
     public void GetHit(float damage)
     {
         _health -= damage;
-        
+
         if (_health <= 0)
         {
             Die();
@@ -82,8 +85,34 @@ public class Enemy : MonoBehaviour
 
             StartCoroutine(HitProcess());
         }
-        
-        
+    }
+
+    public void GetShotgunHit(float damage)
+    {
+        _health -= damage;
+        _hitCount++;
+
+        if (_health <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            _found = true;
+            _animator.SetTrigger("Hit");
+            
+            if (!_hitAudioCheck)
+            {
+                _hitAudio.Play();
+                StartCoroutine(Audio());
+            }
+
+            if (_hitCount >= 5)
+            {
+                _hitCount = 0;
+                StartCoroutine(HitProcess());
+            }
+        }
     }
 
     public void Found()
@@ -91,26 +120,40 @@ public class Enemy : MonoBehaviour
         _found = true;
         _animator.SetTrigger("Found");
     }
-    
+
+    private IEnumerator Audio()
+    {
+        _idleAudio.mute = true;
+        _hitAudioCheck = true;
+        yield return new WaitForSeconds(0.4f);
+        _idleAudio.mute = false;
+        _hitAudioCheck = false;
+    }
+
     private IEnumerator HitProcess()
     {
         _idleAudio.mute = true;
-        _hitAudio.Play();
+        if (!_hitAudioCheck)
+        {
+            _hitAudio.Play();
+            _hitAudioCheck = true;
+        }
         _collider.enabled = false;
         _isHitted = true;
         _agent.SetDestination(transform.position);
-        
+
         yield return new WaitForSeconds(0.15f);
-        
+
         _isHitted = false;
         _animator.SetTrigger("Found");
-        
+
         yield return new WaitForSeconds(0.25f);
-        
+
         _idleAudio.mute = false;
-        
+        _hitAudioCheck = false;
+
         yield return new WaitForSeconds(0.28f);
-        
+
         _collider.enabled = true;
     }
 
@@ -120,10 +163,10 @@ public class Enemy : MonoBehaviour
         _alive = false;
         _agent.isStopped = true;
         _agent.speed = 0f;
-        
+
         _idleAudio.mute = true;
         _hitAudio.Play();
-        
+
         _animator.SetTrigger("Die");
         _collider.enabled = false;
 
@@ -141,7 +184,7 @@ public class Enemy : MonoBehaviour
             Player.Instance.Money += _money;
             GameManager.Instance.AddMoneyLevel();
         }
-        
+
         if (Player.Instance.Arcade)
         {
             StartCoroutine(DieCountdown());

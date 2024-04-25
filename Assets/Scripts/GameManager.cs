@@ -60,6 +60,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
 
     public Button HealButton;
+    
+    public Image KeyImage;
 
     private void Awake()
     {

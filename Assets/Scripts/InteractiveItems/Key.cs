@@ -7,6 +7,7 @@ public class Key : InteractiveObject
     public override void Interact()
     {
         Player.Instance.HaveKey = true;
+        GameManager.Instance.KeyImage.gameObject.SetActive(true);
         
         base.Interact();
     }

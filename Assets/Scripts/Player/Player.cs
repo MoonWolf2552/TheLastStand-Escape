@@ -125,6 +125,8 @@ public class Player : MonoBehaviour
 
         CheckSound();
         StartCoroutine(ScreenRemove());
+        
+        GameManager.Instance.KeyImage.gameObject.SetActive(HaveKey && !Arcade);
     }
 
     void Update()

@@ -10,26 +10,27 @@ public class Gun : MonoBehaviour
     public GunType Name;
     public int GunLevel;
     
-    [SerializeField] private Bullet _bullet;
-    [SerializeField] private Transform _bulletSpawn;
-    [SerializeField] private float _bulletSpeed = 20f;
+    [SerializeField] protected Bullet _bullet;
+    [SerializeField] protected Transform _bulletSpawn;
+    [SerializeField] protected float _bulletSpeed = 20f;
 
-    private float _damage = 15;
-    private float _shotPeriod = 0.3f;
+    protected float _damage = 15;
+    protected float _shotPeriod = 0.3f;
+    protected float _bulletCount = 16;
 
-    [SerializeField] private int _maxAmmo;
-    private int _ammo;
+    [SerializeField] protected int _maxAmmo;
+    protected int _ammo;
 
-    private float _timer;
+    protected float _timer;
 
-    private bool _isReload;
+    protected bool _isReload;
     
-    private TMP_Text _ammoText;
+    protected TMP_Text _ammoText;
 
-    [SerializeField] private ShopLibrary _shopLibrary;
+    [SerializeField] protected ShopLibrary _shopLibrary;
     
-    [SerializeField] private AudioSource _fireAudio;
-    [SerializeField] private AudioSource _reloadAudio;
+    [SerializeField] protected AudioSource _fireAudio;
+    [SerializeField] protected AudioSource _reloadAudio;
 
     private void Start()
     {
@@ -52,10 +53,11 @@ public class Gun : MonoBehaviour
         else if (Name == GunType.Automatic && GunLevel > 0)
         {
             _shotPeriod = _shopLibrary.GunPrices[Name][GunLevel].value;
-            _damage = 7;
+            _damage = 10;
         }
         else if (Name == GunType.Shotgun && GunLevel > 0)
         {
+            _shotPeriod = 1f;
             _damage = _shopLibrary.GunPrices[Name][GunLevel].value;
         }
 
@@ -65,6 +67,7 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
+        _ammoText.text = $"{_ammo}/{_maxAmmo}";
         _timer += Time.deltaTime;
         
         if (Player.Instance.IsRead) return;
@@ -87,7 +90,7 @@ public class Gun : MonoBehaviour
         }
     }
 
-    private void Fire()
+    protected virtual void Fire()
     {
         Bullet newBullet = Instantiate(_bullet, _bulletSpawn.position, _bulletSpawn.rotation);
         newBullet.Damage = _damage;
