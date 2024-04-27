@@ -34,6 +34,8 @@ public class Enemy : MonoBehaviour
     private int _hitCount;
     private bool _hitAudioCheck;
 
+    [SerializeField] private Trash _trashPrefab;
+
     private void Start()
     {
         _playerTransform = Player.Instance.transform;
@@ -173,17 +175,9 @@ public class Enemy : MonoBehaviour
         Progress.Instance.PlayerData.Kills++;
         YandexGame.NewLeaderboardScores("KillsLeaderboard", Progress.Instance.PlayerData.Kills);
         Progress.Instance.Save();
-        if (Player.Instance.Arcade)
-        {
-            Progress.Instance.PlayerData.Money += _money;
-            GameManager.Instance.AddMoney();
-            Progress.Instance.Save();
-        }
-        else
-        {
-            Player.Instance.Money += _money;
-            GameManager.Instance.AddMoneyLevel();
-        }
+
+        Trash newTrash = Instantiate(_trashPrefab, transform.position, Quaternion.identity);
+        newTrash.Money = _money;
 
         if (Player.Instance.Arcade)
         {

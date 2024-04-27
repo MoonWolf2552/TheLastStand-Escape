@@ -76,6 +76,8 @@ public class Player : MonoBehaviour
 
     public int HealCount = 1;
 
+    [SerializeField] private Armor[] _armor;
+
     private void Awake()
     {
         if (Instance == null)
@@ -120,13 +122,15 @@ public class Player : MonoBehaviour
         }
         else
         {
-           GameManager.Instance.AddMoneyLevel(); 
+            GameManager.Instance.AddMoneyLevel();
         }
 
         CheckSound();
         StartCoroutine(ScreenRemove());
-        
+
         GameManager.Instance.KeyImage.gameObject.SetActive(HaveKey && !Arcade);
+
+        ActivateArmor();
     }
 
     void Update()
@@ -273,6 +277,14 @@ public class Player : MonoBehaviour
         GameManager.Instance.BlackScreen.SetActive(false);
         IsRead = false;
     }
+    
+    public void ActivateArmor()
+    {
+        for (int i = 1; i <= Progress.Instance.PlayerData.HealthLevel; i++)
+        {
+            _armor[i - 1].gameObject.SetActive(true);
+        }
+    }
 
     private void OnCollisionEnter(Collision collider)
     {
@@ -307,7 +319,7 @@ public class Player : MonoBehaviour
     public void Heal()
     {
         HealCount--;
-        _health = _shopLibrary.UpgradePrices[UpgradeType.Health][Progress.Instance.PlayerData.HealthLevel].value;
+        _health = _healthSlider.GetComponent<Slider>().maxValue;
         _healthSlider.GetComponent<Slider>().value = _health;
     }
 

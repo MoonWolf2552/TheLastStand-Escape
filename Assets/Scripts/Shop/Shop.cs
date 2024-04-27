@@ -315,6 +315,8 @@ public class Shop : MonoBehaviour
             _healthLevelText.text = _prefix + playerData.HealthLevel;
 
             _healthSlider.value = playerData.HealthLevel;
+            
+            Player.Instance.ActivateArmor();
 
             MoneyText.text = Progress.Instance.PlayerData.Money.ToString();
             GameManager.Instance.AddMoney();

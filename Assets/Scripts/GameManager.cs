@@ -276,6 +276,7 @@ public class GameManager : MonoBehaviour
 
     private void HealPlayer()
     {
+        Pause();
         Player.Instance.Heal();
         HealButton.gameObject.SetActive(Player.Instance.HealCount > 0);
     }
@@ -321,10 +322,9 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
-        HealButton.gameObject.SetActive(Player.Instance.HealCount > 0);
+        HealButton.gameObject.SetActive(!Player.Instance.Arcade && Player.Instance.HealCount > 0);
 
         RestartEscapeButton.gameObject.SetActive(!Player.Instance.Arcade);
-        HealButton.gameObject.SetActive(!Player.Instance.Arcade);
 
         EscapeObject.SetActive(true);
 

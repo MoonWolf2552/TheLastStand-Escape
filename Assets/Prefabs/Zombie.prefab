@@ -104,6 +104,8 @@ MonoBehaviour:
   Room: 0
   _idleAudio: {fileID: 6943809641319497805}
   _hitAudio: {fileID: 6955823419284124152}
+  _trashPrefab: {fileID: 4295162558893770176, guid: 95b31ba9942c9834b89991ea529aa39c,
+    type: 3}
 --- !u!82 &6943809641319497805
 AudioSource:
   m_ObjectHideFlags: 0
