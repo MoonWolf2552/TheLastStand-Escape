@@ -191,6 +191,16 @@ public class GameManager : MonoBehaviour
         Progress.Instance.Save();
     }
 
+    public void AddRewardedMoney()
+    {
+        Progress.Instance.PlayerData.Money += _levelMoney;
+        
+        ReceivedMoney.text = _prefix1 + (_levelMoney * 2);
+        AllMoney.text =  _prefix2 + Progress.Instance.PlayerData.Money;
+        
+        Progress.Instance.Save();
+    }
+
     public void Next()
     {
         if (!_wait)
@@ -271,6 +281,10 @@ public class GameManager : MonoBehaviour
         else if (index == 1)
         {
             HealPlayer();
+        }
+        else if (index == 2)
+        {
+            AddRewardedMoney();
         }
     }
 
