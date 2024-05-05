@@ -363,6 +363,11 @@ PrefabInstance:
       propertyPath: Room
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7200111535620548228, guid: bdd2ef962e51e83408ab3addc5751dd2,
+        type: 3}
+      propertyPath: _money
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -435,6 +440,16 @@ PrefabInstance:
         type: 3}
       propertyPath: Room
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3611600803612846876, guid: c5a0f3e4e858c2a45a0e2251376d6219,
+        type: 3}
+      propertyPath: _money
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 3611600803612846876, guid: c5a0f3e4e858c2a45a0e2251376d6219,
+        type: 3}
+      propertyPath: _foundRadius
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
