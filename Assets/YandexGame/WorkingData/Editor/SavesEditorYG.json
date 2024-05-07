@@ -1,5 +1,5 @@
 {
-    "idSave": 706,
+    "idSave": 718,
     "isFirstSession": false,
     "language": "en",
     "promptDone": false,
@@ -11,9 +11,9 @@
         false
     ],
     "PlayerData": {
-        "Level": 4,
-        "Money": 100,
-        "ActiveGun": 2,
+        "Level": 5,
+        "Money": 600,
+        "ActiveGun": 3,
         "GunDatas": [
             {
                 "Name": 1,
@@ -27,13 +27,13 @@
             },
             {
                 "Name": 3,
-                "IsOpened": false,
-                "GunLevel": 0
+                "IsOpened": true,
+                "GunLevel": 1
             }
         ],
         "HealthLevel": 2,
         "StaminaLevel": 0,
         "Sound": true,
-        "Kills": 7
+        "Kills": 15
     }
 }
