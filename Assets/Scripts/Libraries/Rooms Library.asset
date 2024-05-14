@@ -71,3 +71,15 @@ MonoBehaviour:
       RoomSceneIndex: 24
     - RoomNumber: 3
       RoomSceneIndex: 25
+  - LevelNumber: 7
+    Rooms:
+    - RoomNumber: 0
+      RoomSceneIndex: 26
+    - RoomNumber: 1
+      RoomSceneIndex: 27
+    - RoomNumber: 2
+      RoomSceneIndex: 28
+    - RoomNumber: 3
+      RoomSceneIndex: 29
+    - RoomNumber: 3
+      RoomSceneIndex: 30
