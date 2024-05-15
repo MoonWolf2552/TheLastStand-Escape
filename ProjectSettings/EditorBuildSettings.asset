@@ -99,6 +99,21 @@ EditorBuildSettings:
     path: Assets/Scenes/Level7/L7R4.unity
     guid: 85afe9767316ac043a070218b8162028
   - enabled: 1
+    path: Assets/Scenes/Level8/L8R0.unity
+    guid: a43337ef72ea7b9448a3889fe0cd9910
+  - enabled: 1
+    path: Assets/Scenes/Level8/L8R1.unity
+    guid: 5075192c379434840bfe3c05151bc120
+  - enabled: 1
+    path: Assets/Scenes/Level8/L8R2.unity
+    guid: da30f75a164236c4f9328a202b9cafb7
+  - enabled: 1
+    path: Assets/Scenes/Level8/L8R3.unity
+    guid: 3aaf4afacac78604ea0a11dacc11f35e
+  - enabled: 1
+    path: Assets/Scenes/Level8/L8R4.unity
+    guid: 16b205b77e3d7ad4cb609a58d5150f6f
+  - enabled: 1
     path: Assets/Scenes/lastscenes/Titres.unity
     guid: deba0aee84bcf044888f47b981eace10
   m_configObjects: {}
