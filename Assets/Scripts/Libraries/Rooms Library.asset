@@ -95,3 +95,15 @@ MonoBehaviour:
       RoomSceneIndex: 34
     - RoomNumber: 3
       RoomSceneIndex: 35
+  - LevelNumber: 9
+    Rooms:
+    - RoomNumber: 0
+      RoomSceneIndex: 36
+    - RoomNumber: 1
+      RoomSceneIndex: 37
+    - RoomNumber: 2
+      RoomSceneIndex: 38
+    - RoomNumber: 3
+      RoomSceneIndex: 39
+    - RoomNumber: 3
+      RoomSceneIndex: 40

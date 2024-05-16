@@ -31,3 +31,5 @@ MonoBehaviour:
     SceneIndex: 26
   - LevelNumber: 8
     SceneIndex: 31
+  - LevelNumber: 9
+    SceneIndex: 36
