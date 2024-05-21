@@ -81,7 +81,7 @@ MonoBehaviour:
       RoomSceneIndex: 28
     - RoomNumber: 3
       RoomSceneIndex: 29
-    - RoomNumber: 3
+    - RoomNumber: 4
       RoomSceneIndex: 30
   - LevelNumber: 8
     Rooms:
@@ -93,7 +93,7 @@ MonoBehaviour:
       RoomSceneIndex: 33
     - RoomNumber: 3
       RoomSceneIndex: 34
-    - RoomNumber: 3
+    - RoomNumber: 4
       RoomSceneIndex: 35
   - LevelNumber: 9
     Rooms:
@@ -105,7 +105,7 @@ MonoBehaviour:
       RoomSceneIndex: 38
     - RoomNumber: 3
       RoomSceneIndex: 39
-    - RoomNumber: 3
+    - RoomNumber: 4
       RoomSceneIndex: 40
   - LevelNumber: 10
     Rooms:
@@ -117,7 +117,7 @@ MonoBehaviour:
       RoomSceneIndex: 43
     - RoomNumber: 3
       RoomSceneIndex: 44
-    - RoomNumber: 3
+    - RoomNumber: 4
       RoomSceneIndex: 45
   - LevelNumber: 11
     Rooms:

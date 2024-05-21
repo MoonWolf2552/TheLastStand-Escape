@@ -148,7 +148,7 @@ public class Player : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GameManager.Instance.EscapeObject.active)
+            if (GameManager.Instance.EscapeObject.activeSelf)
             {
                 GameManager.Instance.Continue();
                 return;

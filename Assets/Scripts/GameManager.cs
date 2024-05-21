@@ -198,6 +198,8 @@ public class GameManager : MonoBehaviour
         ReceivedMoney.text = _prefix1 + (_levelMoney * 2);
         AllMoney.text =  _prefix2 + Progress.Instance.PlayerData.Money;
         
+        
+        
         Progress.Instance.Save();
     }
 

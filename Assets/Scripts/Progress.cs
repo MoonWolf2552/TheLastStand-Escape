@@ -10,7 +10,8 @@ public enum GunType
     None,
     Pistol,
     Automatic,
-    Shotgun
+    Shotgun,
+    Minigun
 }
 
 [System.Serializable]
@@ -38,7 +39,8 @@ public class PlayerData
     {
         new GunData(GunType.Pistol, true, 1),
         new GunData(GunType.Automatic, false, 0),
-        new GunData(GunType.Shotgun, false, 0)
+        new GunData(GunType.Shotgun, false, 0),
+        new GunData(GunType.Minigun, false, 0)
     };
     public int HealthLevel;
     public int StaminaLevel;

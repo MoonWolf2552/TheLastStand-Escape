@@ -20,7 +20,7 @@ public class Shop : MonoBehaviour
     public TMP_Text GunLevelPriceText;
     public TMP_Text MoneyText;
 
-    public GunButtonTypes[] Guns;
+    public List<GunButtonTypes> Guns;
 
     private int _gun = 0;
 
@@ -66,6 +66,11 @@ public class Shop : MonoBehaviour
         foreach (GunButtonTypes gun in Guns)
         {
             gun.gameObject.SetActive(false);
+            if (gun.Type == GunType.Minigun && Progress.Instance.PlayerData.Level < 6)
+            {
+                Guns.Remove(gun);
+                break;
+            }
         }
         BuyButton.gameObject.SetActive(false);
         UpgradeButton.gameObject.SetActive(false);
@@ -123,7 +128,7 @@ public class Shop : MonoBehaviour
 
     public void NextGun()
     {
-        _gun = (_gun + 1) % Guns.Length;
+        _gun = (_gun + 1) % Guns.Count;
         Guns[_gun].gameObject.SetActive(true);
 
         MoneyText.text = Progress.Instance.PlayerData.Money.ToString();
@@ -138,9 +143,6 @@ public class Shop : MonoBehaviour
                     BuyButton.gameObject.SetActive(true);
 
                     GunLevelPriceText.gameObject.SetActive(true);
-
-                    Debug.Log(gunData.GunLevel);
-
                     int price = GunPrices[name][gunData.GunLevel + 1].price;
 
                     GunLevelPriceText.text = price.ToString();

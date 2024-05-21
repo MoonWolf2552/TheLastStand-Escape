@@ -55,6 +55,11 @@ public class Gun : MonoBehaviour
             _shotPeriod = _shopLibrary.GunPrices[Name][GunLevel].value;
             _damage = 10;
         }
+        else if (Name == GunType.Minigun && GunLevel > 0)
+        {
+            _shotPeriod = _shopLibrary.GunPrices[Name][GunLevel].value;
+            _damage = 25;
+        }
         else if (Name == GunType.Shotgun && GunLevel > 0)
         {
             _shotPeriod = 1f;
