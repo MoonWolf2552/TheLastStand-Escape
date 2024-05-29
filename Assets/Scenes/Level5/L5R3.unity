@@ -1074,7 +1074,7 @@ PrefabInstance:
     - target: {fileID: 7200111535620548228, guid: bdd2ef962e51e83408ab3addc5751dd2,
         type: 3}
       propertyPath: _health
-      value: 75
+      value: 35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1368,7 +1368,7 @@ PrefabInstance:
     - target: {fileID: 3611600803612846876, guid: c5a0f3e4e858c2a45a0e2251376d6219,
         type: 3}
       propertyPath: _money
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2618,7 +2618,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 95090565265420528, guid: 43b3bfc3c2f2ff146a8d85e63d0a4e26, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3438,12 +3439,12 @@ PrefabInstance:
     - target: {fileID: 7200111535620548228, guid: bdd2ef962e51e83408ab3addc5751dd2,
         type: 3}
       propertyPath: _money
-      value: 200
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7200111535620548228, guid: bdd2ef962e51e83408ab3addc5751dd2,
         type: 3}
       propertyPath: _health
-      value: 75
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4183,7 +4184,7 @@ PrefabInstance:
     - target: {fileID: 3611600803612846876, guid: c5a0f3e4e858c2a45a0e2251376d6219,
         type: 3}
       propertyPath: _money
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

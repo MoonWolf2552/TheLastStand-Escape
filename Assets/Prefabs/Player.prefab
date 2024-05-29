@@ -891,7 +891,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4302051031847945508
 Transform:
   m_ObjectHideFlags: 0
@@ -1238,7 +1238,7 @@ MonoBehaviour:
   - GunType: 3
     Gun: {fileID: 547051219967786766}
   - GunType: 4
-    Gun: {fileID: 0}
+    Gun: {fileID: 6232376588281684364}
   HaveKey: 0
   HaveSecondaryKey: 0
   LastRoom: 0

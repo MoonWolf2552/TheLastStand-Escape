@@ -19,10 +19,10 @@ MonoBehaviour:
       Price: 300
       Value: 15
     - Level: 2
-      Price: 800
+      Price: 400
       Value: 18
     - Level: 3
-      Price: 1200
+      Price: 700
       Value: 21
   - Type: 2
     LevelsPrices:
@@ -33,7 +33,7 @@ MonoBehaviour:
       Price: 1000
       Value: 0.2
     - Level: 3
-      Price: 1500
+      Price: 1200
       Value: 0.1
   - Type: 3
     LevelsPrices:
