@@ -45,7 +45,7 @@ public class PlayerData
     public int HealthLevel;
     public int StaminaLevel;
     public bool Sound = true;
-    public int Kills;
+    public int Waves;
 }
 
 public class Progress : MonoBehaviour

@@ -82,7 +82,7 @@ MonoBehaviour:
     LevelsPrices:
     - Level: 0
       Price: 0
-      Value: 1
+      Value: 2.5
     - Level: 1
       Price: 400
       Value: 4

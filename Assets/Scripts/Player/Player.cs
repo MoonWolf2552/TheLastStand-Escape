@@ -157,7 +157,7 @@ public class Player : MonoBehaviour
             GameManager.Instance.Pause();
         }
         
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))
         {
             if (EnterDoor)
             {
@@ -173,7 +173,20 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (IsRead) return;
+        if (IsRead)
+        {
+            _animator.SetTrigger("Idle");
+            _rigidbody.velocity = Vector3.zero;
+            _stamina += 0.5f * Time.deltaTime;
+
+            if (_stamina > _maxStamina)
+            {
+                _stamina = _maxStamina;
+            }
+            _staminaSlider.GetComponent<Slider>().value = _stamina;
+            
+            return;
+        }
 
         if (Camera.main != null)
         {
@@ -184,7 +197,21 @@ public class Player : MonoBehaviour
 
         _playerModel.rotation = Quaternion.Euler(new Vector3(0, _playerModel.rotation.eulerAngles.y, 0));
 
-        if (IsReload) return;
+        if (IsReload)
+        {
+            _animator.SetTrigger("Idle");
+            _rigidbody.velocity = Vector3.zero;
+            
+            _stamina += 0.5f * Time.deltaTime;
+
+            if (_stamina > _maxStamina)
+            {
+                _stamina = _maxStamina;
+            }
+            _staminaSlider.GetComponent<Slider>().value = _stamina;
+            
+            return;
+        }
 
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");

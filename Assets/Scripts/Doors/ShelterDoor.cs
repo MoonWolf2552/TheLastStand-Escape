@@ -1,15 +1,38 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using YG;
 
 public class ShelterDoor : NextLevelDoor
 {
+    [SerializeField] private TMP_Text _nextLevelText;
+    
+    private String prefix;
+    
+    [SerializeField] private LevelLibrary _levelLibrary;
+    
     protected override void Start()
     {
         base.Start();
         
         Level = Progress.Instance.PlayerData.Level;
+        
+        if (YandexGame.lang == "ru")
+        {
+            prefix = "Этаж ";
+        }
+        else if (YandexGame.lang == "en")
+        {
+            prefix = "Floor ";
+        }
+        else
+        {
+            prefix = "Floor ";
+        }
+        
+        _nextLevelText.text = prefix + (_levelLibrary.LevelDatas.Length - (Level + 1));
     }
 
     public override void Enter()

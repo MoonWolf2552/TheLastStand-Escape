@@ -15,6 +15,8 @@ public class EnemyCounter : MonoBehaviour
 
     private Dictionary<int, List<Enemy>> _enemies = new Dictionary<int, List<Enemy>>();
 
+    private bool _canSpawn = true;
+
     private void Awake()
     {
         if (Instance == null)
@@ -93,6 +95,22 @@ public class EnemyCounter : MonoBehaviour
                 Destroy(enemy.gameObject);
             }
         }
+    }
+
+    private void Update()
+    {
+        if (_levelNumber != 0) return;
+        Enemy[] _enemies = FindObjectsOfType<Enemy>();
+        if (_enemies.Length == 0 && _canSpawn)
+        {
+            _canSpawn = false;
+            StartCoroutine(Arcade.Instance.Spawn());
+        }
+    }
+
+    public void CanSpawn()
+    {
+        _canSpawn = true;
     }
 
     public void DestroyAllEnemiesArcade()

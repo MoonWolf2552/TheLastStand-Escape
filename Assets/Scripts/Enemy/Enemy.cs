@@ -172,10 +172,6 @@ public class Enemy : MonoBehaviour
         _animator.SetTrigger("Die");
         _collider.enabled = false;
 
-        Progress.Instance.PlayerData.Kills++;
-        YandexGame.NewLeaderboardScores("KillsLeaderboard", Progress.Instance.PlayerData.Kills);
-        Progress.Instance.Save();
-
         Trash newTrash = Instantiate(_trashPrefab, transform.position, Quaternion.identity);
         newTrash.Money = _money;
 
@@ -187,7 +183,7 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator DieCountdown()
     {
-        yield return new WaitForSeconds(20);
+        yield return new WaitForSeconds(5);
         Destroy(gameObject);
     }
 }
