@@ -515,6 +515,16 @@ PrefabInstance:
       propertyPath: Room
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7200111535620548228, guid: bdd2ef962e51e83408ab3addc5751dd2,
+        type: 3}
+      propertyPath: _money
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200111535620548228, guid: bdd2ef962e51e83408ab3addc5751dd2,
+        type: 3}
+      propertyPath: _health
+      value: 75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1305,7 +1315,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 1
-  m_NavMeshData: {fileID: 23800000, guid: 2831153d6cb3fbc448ee14062170bd5c, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 59140378c81f8b148a7383f31eb05efb, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &1479368130
 Transform:
@@ -1397,74 +1407,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1551755312}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1621892991
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3450528423579953376, guid: 177c8378a132c7348ab86488f0c4df16,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.4940794
-      objectReference: {fileID: 0}
-    - target: {fileID: 3450528423579953376, guid: 177c8378a132c7348ab86488f0c4df16,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.828
-      objectReference: {fileID: 0}
-    - target: {fileID: 3450528423579953376, guid: 177c8378a132c7348ab86488f0c4df16,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 3.6493993
-      objectReference: {fileID: 0}
-    - target: {fileID: 3450528423579953376, guid: 177c8378a132c7348ab86488f0c4df16,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.34613973
-      objectReference: {fileID: 0}
-    - target: {fileID: 3450528423579953376, guid: 177c8378a132c7348ab86488f0c4df16,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3450528423579953376, guid: 177c8378a132c7348ab86488f0c4df16,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.938183
-      objectReference: {fileID: 0}
-    - target: {fileID: 3450528423579953376, guid: 177c8378a132c7348ab86488f0c4df16,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3450528423579953376, guid: 177c8378a132c7348ab86488f0c4df16,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3450528423579953376, guid: 177c8378a132c7348ab86488f0c4df16,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 139.497
-      objectReference: {fileID: 0}
-    - target: {fileID: 3450528423579953376, guid: 177c8378a132c7348ab86488f0c4df16,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3859374347907703111, guid: 177c8378a132c7348ab86488f0c4df16,
-        type: 3}
-      propertyPath: m_Name
-      value: Note
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 177c8378a132c7348ab86488f0c4df16, type: 3}
 --- !u!1 &1659954976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1576,6 +1518,16 @@ PrefabInstance:
         type: 3}
       propertyPath: Room
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200111535620548228, guid: bdd2ef962e51e83408ab3addc5751dd2,
+        type: 3}
+      propertyPath: _money
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200111535620548228, guid: bdd2ef962e51e83408ab3addc5751dd2,
+        type: 3}
+      propertyPath: _health
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1930,4 +1882,3 @@ SceneRoots:
   - {fileID: 1192921335}
   - {fileID: 1699512915}
   - {fileID: 632375674}
-  - {fileID: 1621892991}

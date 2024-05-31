@@ -753,6 +753,16 @@ PrefabInstance:
       propertyPath: Room
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7200111535620548228, guid: bdd2ef962e51e83408ab3addc5751dd2,
+        type: 3}
+      propertyPath: _money
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200111535620548228, guid: bdd2ef962e51e83408ab3addc5751dd2,
+        type: 3}
+      propertyPath: _health
+      value: 75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -878,7 +888,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 1
-  m_NavMeshData: {fileID: 23800000, guid: 3e15939ac09f2d34c873d82a24f4e22d, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: ad22ef4d339570844be904c69561ec6f, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &686383584
 Transform:
@@ -1863,6 +1873,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Room
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3611600803612846876, guid: c5a0f3e4e858c2a45a0e2251376d6219,
+        type: 3}
+      propertyPath: _money
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
