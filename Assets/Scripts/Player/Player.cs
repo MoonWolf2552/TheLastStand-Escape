@@ -370,7 +370,6 @@ public class Player : MonoBehaviour
         _animator.SetTrigger("Walk");
         Vector3 vector = transform.TransformVector(new Vector3(1, 0, 0)) * _speed;
 
-
         for (float t = 0; t < 1f; t += Time.deltaTime / 5f)
         {
             if (_soundTimer >= _stepPeriod)
@@ -384,6 +383,8 @@ public class Player : MonoBehaviour
         }
         
         _animator.SetTrigger("Idle");
+        IsRead = true;
+        _rigidbody.velocity = Vector3.zero;
 
         GameManager.Instance.ShowWin();
     }
