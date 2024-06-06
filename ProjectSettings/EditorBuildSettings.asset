@@ -147,6 +147,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level11/L11R0.unity
     guid: 65910287c2c87494480dd7318c10b234
   - enabled: 1
+    path: Assets/Scenes/lastscenes/Test.unity
+    guid: decb4f72bb8b7fc45a1a7840cdb3f1bd
+  - enabled: 1
     path: Assets/Scenes/lastscenes/Titres.unity
     guid: deba0aee84bcf044888f47b981eace10
   m_configObjects: {}

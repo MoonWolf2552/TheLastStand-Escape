@@ -400,4 +400,9 @@ public class Player : MonoBehaviour
             AudioListener.volume = 0;
         }
     }
+
+    public bool CheckIfExit()
+    {
+        return _exit;
+    }
 }

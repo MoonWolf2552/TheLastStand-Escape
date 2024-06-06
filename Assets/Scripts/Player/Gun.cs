@@ -75,7 +75,7 @@ public class Gun : MonoBehaviour
         _ammoText.text = $"{_ammo}/{_maxAmmo}";
         _timer += Time.deltaTime;
         
-        if (Player.Instance.IsRead) return;
+        if (Player.Instance.IsRead || Player.Instance.CheckIfExit()) return;
         
         if (Input.GetMouseButton(0))
         {

@@ -17,8 +17,8 @@ public class Arcade : MonoBehaviour
 
     [SerializeField] private TMP_Text _waveNumberText;
 
-    private String prefix;
-    private String prefix2;
+    private String _prefix;
+    private String _prefix2;
 
     private void Awake()
     {
@@ -38,24 +38,24 @@ public class Arcade : MonoBehaviour
 
         if (YandexGame.lang == "ru")
         {
-            prefix = "Волна ";
-            prefix2 = "Передышка";
+            _prefix = "Волна ";
+            _prefix2 = "Передышка";
         }
         else if (YandexGame.lang == "en")
         {
-            prefix = "Wave ";
-            prefix2 = "Respite";
+            _prefix = "Wave ";
+            _prefix2 = "Respite";
         }
         else
         {
-            prefix = "Wave ";
-            prefix2 = "Respite";
+            _prefix = "Wave ";
+            _prefix2 = "Respite";
         }
     }
 
     public IEnumerator Spawn()
     {
-        _waveNumberText.text = prefix2;
+        _waveNumberText.text = _prefix2;
         
         if (_waveNumber > 0 && Progress.Instance.PlayerData.Waves < _waveNumber)
         {
@@ -67,7 +67,7 @@ public class Arcade : MonoBehaviour
         yield return new WaitForSeconds(_spawnPeriod);
 
         _waveNumber++;
-        _waveNumberText.text = prefix + _waveNumber;
+        _waveNumberText.text = _prefix + _waveNumber;
 
 
         foreach (EnemySpawner enemySpawner in _enemySpawners)

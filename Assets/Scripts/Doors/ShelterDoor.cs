@@ -9,7 +9,8 @@ public class ShelterDoor : NextLevelDoor
 {
     [SerializeField] private TMP_Text _nextLevelText;
     
-    private String prefix;
+    private String _prefix;
+    private String _prefix2;
     
     [SerializeField] private LevelLibrary _levelLibrary;
     
@@ -21,18 +22,28 @@ public class ShelterDoor : NextLevelDoor
         
         if (YandexGame.lang == "ru")
         {
-            prefix = "Этаж ";
+            _prefix = "Этаж ";
+            _prefix2 = "Титры";
         }
         else if (YandexGame.lang == "en")
         {
-            prefix = "Floor ";
+            _prefix = "Floor ";
+            _prefix2 = "Titres";
         }
         else
         {
-            prefix = "Floor ";
+            _prefix = "Floor ";
+            _prefix2 = "Titres";
         }
         
-        _nextLevelText.text = prefix + (_levelLibrary.LevelDatas.Length - (Level + 1));
+        if ((_levelLibrary.LevelDatas.Length - (Level + 1)) == 0)
+        {
+            _nextLevelText.text = _prefix2;
+        }
+        else
+        {
+            _nextLevelText.text = _prefix + (_levelLibrary.LevelDatas.Length - (Level + 1));
+        }
     }
 
     public override void Enter()

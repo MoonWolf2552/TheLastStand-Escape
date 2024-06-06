@@ -159,7 +159,7 @@ public class Enemy : MonoBehaviour
         _collider.enabled = true;
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         GetComponent<Collider>().enabled = false;
         _alive = false;
@@ -168,6 +168,7 @@ public class Enemy : MonoBehaviour
 
         _idleAudio.mute = true;
         _hitAudio.Play();
+        _hitAudio.mute = true;
 
         _animator.SetTrigger("Die");
         _collider.enabled = false;
